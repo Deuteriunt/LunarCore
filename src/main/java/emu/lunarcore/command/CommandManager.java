@@ -159,7 +159,7 @@ public class CommandManager {
             handler.execute(cmdArgs);
         } else {
             if (sender != null) {
-                sender.sendMessage("I笨蛋输错指令了,再输错我会哭的!");
+                sender.sendMessage("笨蛋输错指令了,再输错我会哭的!");
             } else {
                 LunarCore.getLogger().info("笨蛋输错指令了,再输错我会哭的!");
             }
