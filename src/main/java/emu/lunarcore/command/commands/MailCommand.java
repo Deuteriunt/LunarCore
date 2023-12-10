@@ -41,7 +41,7 @@ public class MailCommand implements CommandHandler {
         // Send to target
         args.getTarget().getMailbox().sendMail(mail);
         
-        args.sendMessage("Sending mail to " + args.getTarget().getName());
+        args.sendMessage("发送邮件到 " + args.getTarget().getName());
     }
 
 }

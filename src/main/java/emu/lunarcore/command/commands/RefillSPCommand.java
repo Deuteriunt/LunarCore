@@ -17,7 +17,7 @@ public class RefillSPCommand implements CommandHandler {
         });
         lineup.refreshLineup();
         
-        args.sendMessage("Refilled SP for " + args.getTarget().getName());
+        args.sendMessage("Amireux会重新填满你的SP " + args.getTarget().getName());
     }
 
 }

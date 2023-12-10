@@ -17,7 +17,7 @@ public class HealCommand implements CommandHandler {
         });
         lineup.refreshLineup();
 
-        args.sendMessage("ÒÑÖÎÁÆËùÓĞ½ÇÉ« " + args.getTarget().getName());
+        args.sendMessage("å·²æ²»ç–—æ‰€æœ‰è§’è‰² " + args.getTarget().getName());
     }
 
 }

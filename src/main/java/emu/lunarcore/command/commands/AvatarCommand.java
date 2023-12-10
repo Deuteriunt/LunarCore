@@ -51,9 +51,9 @@ public class AvatarCommand implements CommandHandler {
             // Send packet
             args.getTarget().sendPacket(new PacketPlayerSyncScNotify(changeList.toArray(GameAvatar[]::new)));
             // Send message
-            args.sendMessage("½ÇÉ«»ñÈ¡³É¹¦");
+            args.sendMessage("è§’è‰²è·å–æˆåŠŸ");
         } else {
-            args.sendMessage("ÒÑÓĞ¸Ã½ÇÉ«£¬½«ÎŞ·¨»ñÈ¡ÏàÍ¬µÄ½ÇÉ«");
+            args.sendMessage("å·²æœ‰è¯¥è§’è‰²ï¼Œæ— æ³•è·å–ç›¸åŒçš„è§’è‰²");
         }
     }
 

@@ -19,7 +19,7 @@ public class PermissionCommand implements CommandHandler {
                     args.getTarget().getAccount().addPermission(permission);
                 }
                 // Send message
-                args.sendMessage("Added permission for " + args.getTarget().getName());
+                args.sendMessage("添加权限 " + args.getTarget().getName());
             }
             case "remove" -> {
                 // Remove permission
@@ -27,16 +27,16 @@ public class PermissionCommand implements CommandHandler {
                     args.getTarget().getAccount().removePermission(permission);
                 }
                 // Send message
-                args.sendMessage("Removed permission for " + args.getTarget().getName());
+                args.sendMessage("删除权限 " + args.getTarget().getName());
             }
             case "clear" -> {
                 // Clear permissions
                 args.getTarget().getAccount().clearPermission();
                 // Send message
-                args.sendMessage("Cleared permissions for " + args.getTarget().getName());
+                args.sendMessage("清除权限 " + args.getTarget().getName());
             }
             default -> {
-                args.sendMessage("Error: Invalid arguments");
+                args.sendMessage("错误：无效的参数");
             }
         }
     }

@@ -25,7 +25,7 @@ public class SpawnCommand implements CommandHandler {
         Player target = args.getTarget();
         
         if (target.getScene() == null) {
-            args.sendMessage("Error: Target is not in scene");
+            args.sendMessage("错误：目标不在场景中");
             return;
         }
         
@@ -37,7 +37,7 @@ public class SpawnCommand implements CommandHandler {
         
         // Enforce scene max entity limit
         if (target.getScene().getEntities().size() + amount >= LunarCore.getConfig().getServerOptions().getSceneMaxEntites()) {
-            args.sendMessage("Error: Max entities in scene reached");
+            args.sendMessage("错误：场景中的实体数量已达到上限");
             return;
         }
         
@@ -63,7 +63,7 @@ public class SpawnCommand implements CommandHandler {
             }
             
             if (monsterInfo == null || groupInfo == null) {
-                args.sendMessage("Error: No existing monster config found in this scene");
+                args.sendMessage("错误：此场景中没有找到现有的怪物");
                 return;
             }
             
@@ -108,7 +108,7 @@ public class SpawnCommand implements CommandHandler {
             }
             
             if (propInfo == null || groupInfo == null) {
-                args.sendMessage("Error: No existing prop config found in this scene");
+                args.sendMessage("错误：此场景中未找到现有的道具");
                 return;
             }
             
@@ -128,7 +128,7 @@ public class SpawnCommand implements CommandHandler {
             return;
         }
 
-        args.sendMessage("Error: Invalid id");
+        args.sendMessage("错误：无效 ID");
     }
 
 }

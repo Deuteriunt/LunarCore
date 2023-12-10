@@ -131,7 +131,7 @@ public class CommandManager {
             // Check if sender has permission to run the command.
             if (sender != null && !this.checkPermission(sender, command)) {
                 // We have a double null check here just in case
-                sender.sendMessage("ÄúÃ»ÓĞÈ¨ÏŞÊ¹ÓÃ´ËÃüÁî.");
+                sender.sendMessage("æ‚¨æ²¡æœ‰æƒé™ä½¿ç”¨æ­¤å‘½ä»¤.");
                 return;
             }
             
@@ -140,13 +140,13 @@ public class CommandManager {
             
             // Check targeted permission
             if (sender != cmdArgs.getTarget() && !this.checkTargetPermission(sender, command)) {
-                cmdArgs.sendMessage("ÄúÃ»ÓĞÈ¨ÏŞ¶ÔÆäËûÍæ¼ÒÊ¹ÓÃ´ËÃüÁî.");
+                cmdArgs.sendMessage("æ‚¨æ²¡æœ‰æƒé™å¯¹å…¶ä»–ç©å®¶ä½¿ç”¨æ­¤å‘½ä»¤.");
                 return;
             }
             
             // Make sure our command has a target
             if (command.requireTarget() && cmdArgs.getTarget() == null) {
-                cmdArgs.sendMessage("´íÎó£º Ä¿±êÍæ¼ÒÎ´ÕÒµ½»òÀëÏß");
+                cmdArgs.sendMessage("é”™è¯¯ï¼šæœªæ‰¾åˆ°ç›®æ ‡ç©å®¶æˆ–å·²ç¦»çº¿");
                 return;
             }
             
@@ -159,9 +159,9 @@ public class CommandManager {
             handler.execute(cmdArgs);
         } else {
             if (sender != null) {
-                sender.sendMessage("±¿µ°Êä´íÖ¸ÁîÁË,ÔÙÊä´íÎÒ»á¿ŞµÄ!");
+                sender.sendMessage("Iç¬¨è›‹è¾“é”™æŒ‡ä»¤äº†,å†è¾“é”™æˆ‘ä¼šå“­çš„!");
             } else {
-                LunarCore.getLogger().info("±¿µ°Êä´íÖ¸ÁîÁË,ÔÙÊä´íÎÒ»á¿ŞµÄ!");
+                LunarCore.getLogger().info("ç¬¨è›‹è¾“é”™æŒ‡ä»¤äº†,å†è¾“é”™æˆ‘ä¼šå“­çš„!");
             }
         }
     }

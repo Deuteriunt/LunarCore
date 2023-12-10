@@ -30,7 +30,7 @@ public class GiveAllCommand implements CommandHandler {
         String type = args.get(0).toLowerCase();
 
         switch (type) {
-            default -> args.sendMessage("Error: Invalid type");
+            default -> args.sendMessage("é”™è¯¯ï¼šæ— æ•ˆç±»å‹");
             case "m", "materials", "mats" -> {
                 List<GameItem> items = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class GiveAllCommand implements CommandHandler {
                 // Make sure we dont go over the inventory limit
                 var tab = args.getTarget().getInventory().getTabByItemType(ItemMainType.Equipment);
                 if (tab.getSize() >= tab.getMaxCapacity()) {
-                    args.sendMessage(target.getName() + " ¸ÃÎïÆ·ÊıÁ¿¹ı¶à");
+                    args.sendMessage(target.getName() + " has too many of this item type");
                     return;
                 }
                 
@@ -80,7 +80,7 @@ public class GiveAllCommand implements CommandHandler {
                 // Make sure we dont go over the inventory limit
                 var tab = args.getTarget().getInventory().getTabByItemType(ItemMainType.Relic);
                 if (tab.getSize() >= tab.getMaxCapacity()) {
-                    args.sendMessage(target.getName() + " ¸ÃÎïÆ·ÊıÁ¿¹ı¶à");
+                    args.sendMessage(target.getName() + " has too many of this item type");
                     return;
                 }
                 
@@ -155,7 +155,7 @@ public class GiveAllCommand implements CommandHandler {
                 }
 
                 // Send message
-                args.sendMessage("½«ËùÓĞÍ¼±êÌí¼Óµ½ " + target.getName());
+                args.sendMessage("Added all icons to " + target.getName());
             }
             case "consumables", "food" -> {
                 // Get consumables
@@ -169,7 +169,7 @@ public class GiveAllCommand implements CommandHandler {
                 target.getInventory().addItems(items, true);
 
                 // Send message
-                args.sendMessage("½«ËùÓĞÏûºÄÆ·Ìí¼Óµ½ " + target.getName());
+                args.sendMessage("Added all consumables to " + target.getName());
             }
         }
     }

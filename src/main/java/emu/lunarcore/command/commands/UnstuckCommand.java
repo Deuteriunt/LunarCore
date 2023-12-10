@@ -13,13 +13,13 @@ public class UnstuckCommand implements CommandHandler {
     public void execute(CommandArgs args) {
         // Make sure were on the game server
         if (LunarCore.getGameDatabase() == null) {
-            args.sendMessage("Error: Game database not connected");
+            args.sendMessage("错误：未连接到游戏数据库");
             return;
         }
         
         // TODO add some logic to handle unstucking the target if theyre online
         if (args.getTarget() != null) {
-            args.sendMessage("Error: Targeted player is online");
+            args.sendMessage("错误：玩家在线");
             return;
         }
         
@@ -32,10 +32,10 @@ public class UnstuckCommand implements CommandHandler {
             player.save();
             
             // Done
-            args.sendMessage("Player unstuck successfully");
+            args.sendMessage("玩家成功解锁");
         } else {
             // Done
-            args.sendMessage("Error: Player not found in database");
+            args.sendMessage("错误：在数据库中找不到玩家");
         }
     }
 

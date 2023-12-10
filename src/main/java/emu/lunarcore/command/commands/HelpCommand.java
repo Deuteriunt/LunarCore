@@ -10,7 +10,7 @@ public class HelpCommand implements CommandHandler {
 
     @Override
     public void execute(CommandArgs args) {
-        args.sendMessage("显示命令列表:");
+        args.sendMessage("鏄剧ず鍛戒护鍒楄〃:");
         
         var labels = LunarCore.getCommandManager().getLabels().keySet().stream().sorted().toList();
         for (var label : labels) {

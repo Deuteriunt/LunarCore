@@ -17,7 +17,7 @@ public class WorldLevelCommand implements CommandHandler {
         args.getTarget().setWorldLevel(level);
         
         // Done
-        args.sendMessage("将均衡等级设置为 " + level);
+        args.sendMessage("灏嗗潎琛＄瓑绾ц缃负 " + level);
     }
 
 }

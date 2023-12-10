@@ -12,7 +12,7 @@ public class AccountCommand implements CommandHandler {
     @Override
     public void execute(CommandArgs args) {
         if (args.size() < 2) {
-            args.sendMessage("无效参数数量");
+            args.sendMessage("参数数量无效");
             return;
         }
         
@@ -29,16 +29,16 @@ public class AccountCommand implements CommandHandler {
                 }
     
                 if (AccountHelper.createAccount(username, null, reservedUid) != null) {
-                    args.sendMessage("已创建帐户");
+                    args.sendMessage("帐号已创建");
                 } else {
-                    args.sendMessage("账户已存在");
+                    args.sendMessage("账号已存在");
                 }
             }
             case "delete" -> {
                 if (AccountHelper.deleteAccount(username)) {
-                    args.sendMessage("帐户已删除");
+                    args.sendMessage("账号已删除");
                 } else {
-                    args.sendMessage("账户不存在");
+                    args.sendMessage("帐号不存在");
                 }
             }
         }

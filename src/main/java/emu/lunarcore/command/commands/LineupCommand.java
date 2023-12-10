@@ -22,7 +22,7 @@ public class LineupCommand implements CommandHandler {
         
         // Do not set lineup while the target player is in a battle
         if (target.isInBattle()) {
-            args.sendMessage("Error: The targeted player is in a battle");
+            args.sendMessage("错误:目标玩家正在战斗中");
             return;
         }
         
@@ -56,9 +56,9 @@ public class LineupCommand implements CommandHandler {
             lineup.refreshLineup();
             target.getScene().syncLineup();
             
-            args.sendMessage("Set the lineup of " + target.getName() + " successfully");
+            args.sendMessage("设置阵容 " + target.getName() + " 成功");
         } else {
-            args.sendMessage("No avatars could be added");
+            args.sendMessage("无法添加角色");
         }
     }
 

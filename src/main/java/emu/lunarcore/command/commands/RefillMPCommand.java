@@ -11,7 +11,7 @@ public class RefillMPCommand implements CommandHandler {
     @Override
     public void execute(CommandArgs args) {
         args.getTarget().getCurrentLineup().addMp(GameConstants.MAX_MP);
-        args.sendMessage("Successfully refilled skill points for " + args.getTarget().getName());
+        args.sendMessage("已成功补充战绩点 " + args.getTarget().getName());
     }
 
 }
