@@ -129,7 +129,7 @@ public class Config {
         public WelcomeMail() {
             this.title = "欢迎来到Amireux星穹铁道1.5服务器.";
             this.sender = "Amireux";
-            this.content = "欢迎来到Amireux 星穹铁道1.5服务端\n如果你是买来的你被骗了，请举报+退款\n本服务端免费，倒卖者死全家.祝您游戏愉快！";
+            this.content = "欢迎来到Amireux 星穹铁道1.5服务端\n如果你是买来的你被骗了，请举报+退款\n本服务端免费，倒卖者死全家，祝您游戏愉快！";
             this.attachments = List.of(
                 new ItemParam(2, 1000000),
                 new ItemParam(101, 100),
