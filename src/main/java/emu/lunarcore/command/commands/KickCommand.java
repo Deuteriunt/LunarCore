@@ -6,7 +6,7 @@ import emu.lunarcore.command.CommandHandler;
 
 @Command(
     label = "kick",
-    desc = "/kick @[player id]. Kicks a player from the server.",
+    desc = "/kick @[玩家uid]. 将指定玩家踢出服务器",
     requireTarget = true,
     permission = "player.kick"
 )
