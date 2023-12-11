@@ -10,7 +10,7 @@ import emu.lunarcore.command.CommandHandler;
 import emu.lunarcore.game.avatar.GameAvatar;
 import emu.lunarcore.server.packet.send.PacketPlayerSyncScNotify;
 
-@Command(label = "avatar", aliases = {"a"}, requireTarget = true, permission = "player.avatar", desc = /avatar {cur | all | lineup} lv(等级) p(突破等级) r(星魂数量) s(技能等级). 设置角色属性，cur(当前角色)all(所有角色)lineup(当前队伍里的角色，就是四人队.")
+@Command(label = "avatar", aliases = {"a"}, requireTarget = true, permission = "player.avatar", desc = /avatar {cur | all | lineup} lv(等级) p(突破等级) r(星魂数量) s(技能等级). 设置角色属性，cur(当前角色)all(所有角色)lineup(当前队伍里的角色，就是四人队)")
 public class AvatarCommand implements CommandHandler {
 
     @Override
