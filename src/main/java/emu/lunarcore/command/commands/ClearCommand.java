@@ -9,7 +9,7 @@ import emu.lunarcore.command.CommandHandler;
 import emu.lunarcore.game.enums.ItemMainType;
 import emu.lunarcore.game.inventory.GameItem;
 
-@Command(label = "clear", permission = "player.clear", requireTarget = true, desc = "/clear {relics | lightcones | materials | items} lv(filter level). Removes filter items from the targeted player's inventory.")
+@Command(label = "clear", permission = "player.clear", requireTarget = true, desc = "/clear {relics | lightcones | materials | items} lv(等级). 从玩家背包中删除某一类物品relics(遗物)lightcones(光锥)materials(材料)items(物品)")
 public class ClearCommand implements CommandHandler {
 
     @Override
