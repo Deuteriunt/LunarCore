@@ -109,9 +109,9 @@ public class Config {
     @Getter
     public static class ServerProfile {
         public String name = "Amireux";
-        public String signature = "ÊäÈë /help ÒÔ»ñÈ¡ÃüÁîÁĞ±í£¬\\n" + //
-                "»¶Ó­À´µ½Amireux ĞÇñ·ÌúµÀ1.5·şÎñ¶Ë£¬Èç¹ûÄãÊÇÂòÀ´µÄÄã±»Æ­ÁË£¬Çë¾Ù±¨+ÍË¿î£¬±¾·şÎñ¶ËÃâ·Ñ£¬µ¹ÂôÕßËÀÈ«¼Ò.\\n" + //
-                "×£ÄúÓÎÏ·Óä¿ì";
+        public String signature = "è¾“å…¥ /help ä»¥è·å–å‘½ä»¤åˆ—è¡¨ï¼Œ\\n" + //
+                "æ¬¢è¿æ¥åˆ°Amireux æ˜Ÿç©¹é“é“1.5æœåŠ¡ç«¯ï¼Œå¦‚æœä½ æ˜¯ä¹°æ¥çš„ä½ è¢«éª—äº†ï¼Œè¯·ä¸¾æŠ¥+é€€æ¬¾ï¼Œæœ¬æœåŠ¡ç«¯å…è´¹ï¼Œå€’å–è€…æ­»å…¨å®¶.\\n" + //
+                "ç¥æ‚¨æ¸¸æˆæ„‰å¿«";
         public int level = 114514;
         public int headIcon = 201302;
         public int chatBubbleId = 0;
@@ -127,9 +127,9 @@ public class Config {
         public List<ItemParam> attachments;
         
         public WelcomeMail() {
-            this.title = "Welcome to the Amireux Star Dome Railway 1.5 server.";
+            this.title = "æ¬¢è¿æ¥åˆ°Amireuxæ˜Ÿç©¹é“é“1.5æœåŠ¡å™¨.";
             this.sender = "Amireux";
-            this.content = "Welcome to the Amireux Star Dome Railway 1.5 server. If you bought it and were cheated, please report + refund. This server is free, and those who sell it will die.";
+            this.content = "æ¬¢è¿æ¥åˆ°Amireux æ˜Ÿç©¹é“é“1.5æœåŠ¡ç«¯\nå¦‚æœä½ æ˜¯ä¹°æ¥çš„ä½ è¢«éª—äº†ï¼Œè¯·ä¸¾æŠ¥+é€€æ¬¾\næœ¬æœåŠ¡ç«¯å…è´¹ï¼Œå€’å–è€…æ­»å…¨å®¶.ç¥æ‚¨æ¸¸æˆæ„‰å¿«ï¼";
             this.attachments = List.of(
                 new ItemParam(2, 1000000),
                 new ItemParam(101, 100),
