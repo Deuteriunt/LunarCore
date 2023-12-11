@@ -5,7 +5,7 @@ import emu.lunarcore.command.CommandArgs;
 import emu.lunarcore.command.CommandHandler;
 import emu.lunarcore.util.Utils;
 
-@Command(label = "worldlevel", aliases = {"wl"}, permission = "player.worldlevel", requireTarget = true, desc = "/worldlevel [均衡等级] 设置玩家均衡等级")
+@Command(label = "worldlevel", aliases = {"wl"}, permission = "player.worldlevel", requireTarget = true, desc = "/worldlevel [均衡等级] 设置玩家均衡等级.")
 public class WorldLevelCommand implements CommandHandler {
 
     @Override
