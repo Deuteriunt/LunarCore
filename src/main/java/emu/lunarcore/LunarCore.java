@@ -196,7 +196,7 @@ public class LunarCore {
             Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
             file.write(gson.toJson(config));
         } catch (Exception e) {
-            getLogger().error("Config save error");
+            getLogger().error("配置保存错误");
         }
     }
 
@@ -248,7 +248,7 @@ public class LunarCore {
             // CTRL + C / CTRL + D
             System.exit(0);
         } catch (Exception e) {
-            LunarCore.getLogger().error("Terminal error: ", e);
+            LunarCore.getLogger().error("终端错误: ", e);
         }
     }
 
