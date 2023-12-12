@@ -60,7 +60,7 @@ public class LunarCore {
 
     public static void main(String[] args) {
         // Start Server
-        LunarCore.getLogger().info("正在打开Amireux编译的Lunar Core " + getJarVersion());
+        LunarCore.getLogger().info("正在打开Amireux编译的Lunar Core，倒卖者死全家！" + getJarVersion());
         LunarCore.getLogger().info("Git hash: " + getGitHash());
         LunarCore.getLogger().info("游戏版本: " + GameConstants.VERSION);
         boolean generateHandbook = true;
@@ -74,7 +74,7 @@ public class LunarCore {
         try {
             LunarCore.getPluginManager().loadPlugins();
         } catch (Exception exception) {
-            LunarCore.getLogger().error("Unable to load plugins.", exception);
+            LunarCore.getLogger().error("无法加载插件.", exception);
         }
 
         // Parse arguments
@@ -93,7 +93,7 @@ public class LunarCore {
             case "-database":
                 // Database only
                 DatabaseManager.startInternalMongoServer(LunarCore.getConfig().getInternalMongoServer());
-                LunarCore.getLogger().info("Running local mongo server at " + DatabaseManager.getServer().getConnectionString());
+                LunarCore.getLogger().info("运行本地Mongo服务器 " + DatabaseManager.getServer().getConnectionString());
                 // Console
                 LunarCore.startConsole();
                 return;
@@ -115,7 +115,7 @@ public class LunarCore {
             // Start Database(s)
             LunarCore.initDatabases();
         } catch (Exception exception) {
-            LunarCore.getLogger().error("Unable to start the database(s).", exception);
+            LunarCore.getLogger().error("无法启动数据库.", exception);
         }
 
         try {
@@ -123,7 +123,7 @@ public class LunarCore {
             httpServer = new HttpServer(serverType);
             httpServer.start();
         } catch (Exception exception) {
-            LunarCore.getLogger().error("Unable to start the HTTP server.", exception);
+            LunarCore.getLogger().error("无法启动HTTP服务器.", exception);
         }
 
         // Start game server
@@ -131,7 +131,7 @@ public class LunarCore {
             gameServer = new GameServer(getConfig().getGameServer());
             gameServer.start();
         } catch (Exception exception) {
-            LunarCore.getLogger().error("Unable to start the game server.", exception);
+            LunarCore.getLogger().error("无法启动游戏服务器.", exception);
         }
         
         // Hook into shutdown event
