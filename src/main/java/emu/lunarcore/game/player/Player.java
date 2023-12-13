@@ -160,6 +160,7 @@ public class Player {
         this.isNew = true;
         this.initUid();
         this.resetPosition();
+        this.setLevel(LunarCore.getConfig().getServerOptions().startTrailblazerLevel);
         
         // Setup player data
         this.name = GameConstants.DEFAULT_NAME;
@@ -167,7 +168,6 @@ public class Player {
         this.headIcon = 200001;
         this.phoneTheme = 221000;
         this.chatBubble = 220000;
-        this.level = 1;
         this.stamina = GameConstants.MAX_STAMINA;
         this.nextStaminaRecover = System.currentTimeMillis();
 
@@ -196,11 +196,37 @@ public class Player {
         return session.getAccount();
     }
 
-    public void setLevel(int newLevel) {
-        this.level = Math.max(Math.min(newLevel, GameConstants.MAX_TRAILBLAZER_LEVEL), 1);
+    public void setLevel(int lvl) {
+        int oldLevel = this.level;
+        int newLevel = Math.max(Math.min(lvl, GameConstants.MAX_TRAILBLAZER_LEVEL), 1);
+        this.onLevelChange(oldLevel, newLevel);
+        
+        this.level = newLevel;
         this.exp = GameData.getPlayerExpRequired(this.level);
-        this.sendPacket(new PacketPlayerSyncScNotify(this));
-        this.save();
+        
+        if (this.isOnline()) {
+            this.getSession().send(new PacketPlayerSyncScNotify(this));
+            this.save();
+        }
+    }
+    
+    private void onLevelChange(int oldLevel, int newLevel) {
+        // Auto upgrades the player's world level when they level up to the right level
+        if (LunarCore.getConfig().getServerOptions().autoUpgradeWorldLevel) {
+            int maxWorldLevel = 0;
+            
+            for (int i = 0; i < GameConstants.WORLD_LEVEL_UPGRADES.length; i++) {
+                if (newLevel >= GameConstants.WORLD_LEVEL_UPGRADES[i]) {
+                    maxWorldLevel = i;
+                } else {
+                    break;
+                }
+            }
+            
+            if (maxWorldLevel > this.getWorldLevel()) {
+                this.setWorldLevel(maxWorldLevel);
+            }
+        }
     }
     
     public boolean isOnline() {
@@ -363,27 +389,40 @@ public class Player {
     }
 
     public void addSCoin(int amount) {
-        this.scoin = Utils.safeAdd(this.scoin, amount);
-        this.sendPacket(new PacketPlayerSyncScNotify(this));
+        int newAmount = Utils.safeAdd(this.scoin, amount);
+        if (this.scoin != newAmount) {
+            this.scoin = newAmount;
+            this.sendPacket(new PacketPlayerSyncScNotify(this));
+        }
     }
 
     public void addHCoin(int amount) {
-        this.hcoin = Utils.safeAdd(this.hcoin, amount);
-        this.sendPacket(new PacketPlayerSyncScNotify(this));
+        int newAmount = Utils.safeAdd(this.hcoin, amount);
+        if (this.hcoin != newAmount) {
+            this.hcoin = newAmount;
+            this.sendPacket(new PacketPlayerSyncScNotify(this));
+        }
     }
 
     public void addMCoin(int amount) {
-        this.mcoin = Utils.safeAdd(this.mcoin, amount);
-        this.sendPacket(new PacketPlayerSyncScNotify(this));
+        int newAmount = Utils.safeAdd(this.mcoin, amount);
+        if (this.mcoin != newAmount) {
+            this.mcoin = newAmount;
+            this.sendPacket(new PacketPlayerSyncScNotify(this));
+        }
     }
     
     public void addTalentPoints(int amount) {
-        this.talentPoints = Utils.safeAdd(this.talentPoints, amount);
-        this.sendPacket(new PacketSyncRogueVirtualItemInfoScNotify(this));
+        int newAmount = Utils.safeAdd(this.talentPoints, amount);
+        if (this.talentPoints != newAmount) {
+            this.talentPoints = newAmount;
+            this.sendPacket(new PacketSyncRogueVirtualItemInfoScNotify(this));
+        }
     }
 
     public void addExp(int amount) {
-        // Required exp
+        // Setup
+        int oldLevel = this.level;
         int reqExp = GameData.getPlayerExpRequired(level + 1);
 
         // Add exp
@@ -394,7 +433,8 @@ public class Player {
             reqExp = GameData.getPlayerExpRequired(this.level + 1);
         }
 
-        // Save
+        // Update level and change property
+        this.onLevelChange(oldLevel, this.level);
         this.save();
 
         // Send packet
