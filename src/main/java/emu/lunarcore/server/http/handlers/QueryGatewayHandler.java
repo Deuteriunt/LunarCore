@@ -23,14 +23,13 @@ public class QueryGatewayHandler implements Handler {
         Gateserver gateserver = Gateserver.newInstance()
                 .setRegionName(LunarCore.getConfig().getGameServer().getId())
                 .setIp(LunarCore.getConfig().getGameServer().getPublicAddress())
-                .setPort(LunarCore.getConfig().getGameServer().getPort())
+                .setPort(LunarCore.getConfig().getGameServer().getPublicPort())
                 .setMsg("Access verification failed. Please check if you have logged in to the correct account and server.") // in case there is some error idk
                 .setUnk1(true)
                 .setUnk2(true)
                 .setUnk3(true)
                 .setUnk4(true)
-                .setUnk5(true)
-                .setUnk6(true);
+                .setUnk5(true);
         
         if (data.assetBundleUrl != null) {
             gateserver.setAssetBundleUrl(data.assetBundleUrl);

@@ -6,7 +6,7 @@ import emu.lunarcore.command.CommandHandler;
 import emu.lunarcore.game.account.AccountHelper;
 import emu.lunarcore.util.Utils;
 
-@Command(label = "account", permission = "admin.account", desc = "/account {create (创建) | delete (删除)} [用户名] (玩家uid).")
+@Command(label = "account", permission = "admin.account", desc = "/account {create (创建) | delete (删除)} [用户名] (玩家uid). 创建或者删除账号.")
 public class AccountCommand implements CommandHandler {
 
     @Override
@@ -29,7 +29,7 @@ public class AccountCommand implements CommandHandler {
                 }
     
                 if (AccountHelper.createAccount(username, null, reservedUid) != null) {
-                    args.sendMessage("帐号已创建");
+                    args.sendMessage("账号已创建");
                 } else {
                     args.sendMessage("账号已存在");
                 }
@@ -38,7 +38,7 @@ public class AccountCommand implements CommandHandler {
                 if (AccountHelper.deleteAccount(username)) {
                     args.sendMessage("账号已删除");
                 } else {
-                    args.sendMessage("帐号不存在");
+                    args.sendMessage("账号不存在");
                 }
             }
         }

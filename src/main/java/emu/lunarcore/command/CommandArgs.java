@@ -197,7 +197,10 @@ public class CommandArgs {
         } else if (item.getExcel().isRelic()) {
             // Sub stats
             if (this.getMap() != null) {
+                // Reset substats first
                 item.resetSubAffixes();
+                
+                int maxCount = (int) Math.floor(LunarCore.getConfig().getServerOptions().maxCustomRelicLevel / 3) + 1;
                 hasChanged = true;
                 
                 for (var entry : this.getMap().int2IntEntrySet()) {
@@ -206,7 +209,9 @@ public class CommandArgs {
                     var subAffix = GameData.getRelicSubAffixExcel(item.getExcel().getRelicExcel().getSubAffixGroup(), entry.getIntKey());
                     if (subAffix == null) continue;
                     
-                    item.getSubAffixes().add(new GameItemSubAffix(subAffix, entry.getIntValue()));
+                    // Set count
+                    int count = Math.min(entry.getIntValue(), maxCount);
+                    item.getSubAffixes().add(new GameItemSubAffix(subAffix, count));
                 }
             }
             
@@ -222,7 +227,7 @@ public class CommandArgs {
             // Try to set level
             if (this.getLevel() > 0) {
                 // Set relic level
-                item.setLevel(Math.min(this.getLevel(), 999));
+                item.setLevel(Math.min(this.getLevel(), LunarCore.getConfig().getServerOptions().maxCustomRelicLevel));
                 
                 // Apply sub stat upgrades to the relic
                 int upgrades = item.getMaxNormalSubAffixCount() - item.getCurrentSubAffixCount();

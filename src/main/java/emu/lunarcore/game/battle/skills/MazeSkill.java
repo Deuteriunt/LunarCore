@@ -5,8 +5,7 @@ import java.util.List;
 
 import emu.lunarcore.data.excel.AvatarExcel;
 import emu.lunarcore.game.avatar.GameAvatar;
-import emu.lunarcore.game.battle.Battle;
-import emu.lunarcore.game.scene.entity.EntityMonster;
+import emu.lunarcore.game.scene.entity.GameEntity;
 import emu.lunarcore.proto.MotionInfoOuterClass.MotionInfo;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +27,9 @@ public class MazeSkill {
         this.attackActions = new ArrayList<>();
     }
     
-    // Triggered when player casts a skill
+    /**
+     * Triggered when player casts a skill
+     */
     public void onCast(GameAvatar caster, MotionInfo castPosition) {
         if (this.getCastActions().size() == 0) return;
         
@@ -37,21 +38,25 @@ public class MazeSkill {
         }
     }
     
-    // Triggered when player attacks an enemy
-    public void onAttack(GameAvatar caster, Battle battle) {
+    /** 
+     * Triggered when player casts a skill and it hits entities
+     */
+    public void onCastHit(GameAvatar caster, List<? extends GameEntity> entities) {
         if (this.getAttackActions().size() == 0) return;
         
         for (var action : this.getAttackActions()) {
-            action.onAttack(caster, battle);
+            action.onCastHit(caster, entities);
         }
     }
     
-    // Triggered when player attacks an enemy
-    public void onAttack(GameAvatar caster, List<EntityMonster> monsters) {
+    /**
+     * Triggered when player attacks an enemy
+     */
+    public void onAttack(GameAvatar caster, List<? extends GameEntity> targets) {
         if (this.getAttackActions().size() == 0) return;
         
         for (var action : this.getAttackActions()) {
-            action.onAttack(caster, monsters);
+            action.onAttack(caster, targets);
         }
     }
 }

@@ -2,6 +2,7 @@ package emu.lunarcore.data.config;
 
 import java.util.List;
 
+import emu.lunarcore.data.GameData;
 import emu.lunarcore.data.excel.AvatarExcel;
 import emu.lunarcore.game.battle.skills.*;
 import lombok.Getter;
@@ -23,12 +24,19 @@ public class SkillAbilityInfo {
             
             // Skip if not a maze skill
             if (ability.getName().contains("MazeSkill")) {
-                skill = new MazeSkill(avatarExcel, 1);
+                skill = new MazeSkill(avatarExcel, 2);
                 avatarExcel.setMazeSkill(skill);
                 
                 actionList = skill.getCastActions();
+                
+                // Hacky way to check if an avatar can summon with their skill
+                var summonUnitExcel = GameData.getSummonUnitExcelMap().get((skill.getId() * 10) + 1);
+                if (summonUnitExcel != null && !summonUnitExcel.isIsClient()) {
+                    // TODO duration is hardcoded
+                    skill.getCastActions().add(new MazeSkillSummonUnit(summonUnitExcel, 20));
+                }
             } else if (ability.getName().contains("NormalAtk")) {
-                skill = new MazeSkill(avatarExcel, 0);
+                skill = new MazeSkill(avatarExcel, 1);
                 avatarExcel.setMazeAttack(skill);
                 
                 actionList = skill.getAttackActions();
@@ -46,6 +54,7 @@ public class SkillAbilityInfo {
     }
     
     // "Simple" way to parse maze attacks/skills
+    // TODO parse tasks better
     private void parseTask(MazeSkill skill, List<MazeSkillAction> actionList, TaskInfo task) {
         if (task.getType().contains("AddMazeBuff")) {
             // TODO get duration from params if buff duration is dynamic
@@ -59,7 +68,7 @@ public class SkillAbilityInfo {
             // TODO get sp increase value from params, also handle target alias
             actionList.add(new MazeSkillModifySP(50));
         } else if (task.getType().contains("CreateSummonUnit")) {
-            
+            // Ignored
         } else if (task.getSuccessTaskList() != null) {
             for (TaskInfo t : task.getSuccessTaskList()) {
                 parseTask(skill, actionList, t);
@@ -70,7 +79,7 @@ public class SkillAbilityInfo {
                     parseTask(skill, skill.getAttackActions(), t);
                 }
             }
-            if (skill.getIndex() == 1) {
+            if (skill.getIndex() == 2) {
                 skill.setTriggerBattle(task.isTriggerBattle());
             }
         } else if (task.getType().contains("AdventureFireProjectile")) {

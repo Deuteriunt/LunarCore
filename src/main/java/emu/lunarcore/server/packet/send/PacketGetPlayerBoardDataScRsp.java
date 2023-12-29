@@ -12,11 +12,13 @@ public class PacketGetPlayerBoardDataScRsp extends BasePacket {
         super(CmdId.GetPlayerBoardDataScRsp);
         
         var data = GetPlayerBoardDataScRsp.newInstance()
-                .setUnk1("")
                 .setCurrentHeadIconId(player.getHeadIcon())
                 .setSignature(player.getSignature());
         
-        for (int id : player.getUnlockedHeadIcons()) {
+        // Set empty display avatars
+        data.getMutableDisplayAvatarVec();
+        
+        for (int id : player.getUnlocks().getHeadIcons()) {
             data.addUnlockedHeadIconList(HeadIcon.newInstance().setId(id));
         }
         

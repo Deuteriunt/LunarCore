@@ -1,6 +1,8 @@
 package emu.lunarcore;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import emu.lunarcore.plugin.PluginManager;
 import org.jline.reader.EndOfFileException;
@@ -115,7 +117,7 @@ public class LunarCore {
             // Start Database(s)
             LunarCore.initDatabases();
         } catch (Exception exception) {
-            LunarCore.getLogger().error("无法启动数据库.", exception);
+            LunarCore.getLogger().error("\"无法启动数据库.", exception);
         }
 
         try {
@@ -210,26 +212,34 @@ public class LunarCore {
         } catch (Exception e) {
             // Ignored
         }
+        
         return "";
     }
 
     private static String getGitHash() {
+        // Use a string builder in case one of the build config fields are missing
+        StringBuilder builder = new StringBuilder();
+        
         // Safely get the build config class without errors even if it hasnt been generated yet
         try {
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Class<?> buildConfig = Class.forName(LunarCore.class.getPackageName() + ".BuildConfig");
             
             String hash = buildConfig.getField("GIT_HASH").get(null).toString();
-            String date = buildConfig.getField("GIT_HASH_TIME").get(null).toString();
+            builder.append(hash);
             
-            if (date == null || date.isEmpty()) {
-                return hash;
-            }
-            
-            return hash + " (" + date + ")";
+            String timestamp = buildConfig.getField("GIT_TIMESTAMP").get(null).toString();
+            long time = Long.parseLong(timestamp) * 1000;
+            builder.append(" (" + sf.format(new Date(time)) + ")");
         } catch (Exception e) {
             // Ignored
         }
-        return "Unknown";
+        
+        if (builder.isEmpty()) {
+            return "";
+        } else {
+            return builder.toString();
+        }
     }
 
     // Server console

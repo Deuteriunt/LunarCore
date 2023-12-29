@@ -86,7 +86,7 @@ public abstract class Plugin {
          */
         public static Identifier from(Config config) {
             if (!config.validate())
-                throw new IllegalArgumentException("≤Âº˛≈‰÷√Œﬁ–ß.");
+                throw new IllegalArgumentException("Invalid plugin config supplied.");
             return new Identifier(config.name(), config.description(), config.version(), config.authors());
         }
     }

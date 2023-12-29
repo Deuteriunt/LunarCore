@@ -17,7 +17,7 @@ import emu.lunarcore.game.scene.entity.EntityProp;
 import emu.lunarcore.util.Position;
 import emu.lunarcore.util.Utils;
 
-@Command(label = "spawn", permission = "player.spawn", requireTarget = true, desc = "/spawn [生物id] [场景id] x[数量] lv[等级] r[半径] 生成实体.")
+@Command(label = "spawn", permission = "player.spawn", requireTarget = true, desc = "/spawn [怪物id] [场景id] x[数量] lv[等级] r[半径] 生成实体.")
 public class SpawnCommand implements CommandHandler {
 
     @Override
@@ -73,10 +73,10 @@ public class SpawnCommand implements CommandHandler {
                 EntityMonster monster = new EntityMonster(target.getScene(), monsterExcel, groupInfo, monsterInfo);
                 monster.getPos().set(pos);
                 monster.setEventId(monsterInfo.getEventID());
-                monster.setOverrideStageId(stage);
+                monster.setCustomStageId(stage);
                 
                 if (args.getLevel() > 0) {
-                    monster.setOverrideLevel(Math.min(args.getLevel(), 100));
+                    monster.setCustomLevel(Math.min(args.getLevel(), 100));
                 }
                 
                 target.getScene().addEntity(monster, true);

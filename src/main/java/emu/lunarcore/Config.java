@@ -3,6 +3,8 @@ package emu.lunarcore;
 import java.util.List;
 import java.util.Set;
 
+import com.google.gson.annotations.SerializedName;
+
 import emu.lunarcore.data.common.ItemParam;
 import lombok.Getter;
 
@@ -50,11 +52,32 @@ public class Config {
     @Getter
     private static class ServerConfig {
         public String bindAddress = "0.0.0.0";
+        @SerializedName(value = "bindPort", alternate = {"port"})
+        public int bindPort;
+        
+        // Will return bindAddress if publicAddress is null
         public String publicAddress = "127.0.0.1";
-        public int port;
-
+        // Will return bindPort if publicPort is null
+        public Integer publicPort;
+        
         public ServerConfig(int port) {
-            this.port = port;
+            this.bindPort = port;
+        }
+        
+        public String getPublicAddress() {
+            if (this.publicAddress != null && !this.publicAddress.isEmpty()) {
+                return this.publicAddress;
+            }
+            
+            return this.bindAddress;
+        }
+        
+        public int getPublicPort() {
+            if (this.publicPort != null && this.publicPort != 0) {
+                return this.publicPort;
+            }
+            
+            return this.bindPort;
         }
     }
     
@@ -68,7 +91,7 @@ public class Config {
         }
         
         public String getDisplayAddress() {
-            return (useSSL ? "https" : "http") + "://" + publicAddress + ":" + port;
+            return (useSSL ? "https" : "http") + "://" + getPublicAddress() + ":" + getPublicPort();
         }
     }
 
@@ -76,7 +99,7 @@ public class Config {
     public static class GameServerConfig extends ServerConfig {
         public String id = "lunar_rail_test";
         public String name = "Amireux";
-        public String description = "Amireux HSR Test Server";
+        public String description = "Amireux LunarCore server";
         public int kcpInterval = 40;
 
         public GameServerConfig(int port) {
@@ -88,11 +111,12 @@ public class Config {
     public static class ServerOptions {
         public boolean autoCreateAccount = true;
         public int sceneMaxEntites = 500;
-        public boolean spendStamina = true;
+        public int maxCustomRelicLevel = 15; // Maximum level of a relic that the player can create with the /give command
         public boolean unlockAllChallenges = true;
+        public boolean spendStamina = true;
         public int staminaRecoveryRate = 5 * 60;
         public int staminaReserveRecoveryRate = 18 * 60;
-        public int startTrailblazerLevel = 80; // Starting trailblazer level for new players
+        public int startTrailblazerLevel = 1; // Starting trailblazer level for new players
         public boolean autoUpgradeWorldLevel = true; // Automatically upgrades world level when the player reaches a certain TB level
         public String language = "EN";
         public Set<String> defaultPermissions = Set.of("*");
@@ -108,6 +132,7 @@ public class Config {
             return staminaReserveRecoveryRate > 0 ? staminaReserveRecoveryRate : 1;
         }
     }
+    
     @Getter
     public static class ServerRates {
         public double exp = 1.0;
@@ -120,9 +145,7 @@ public class Config {
     @Getter
     public static class ServerProfile {
         public String name = "Amireux";
-        public String signature = "输入 /help 以获取命令列表，\\n" + //
-                "欢迎来到Amireux 星穹铁道1.5服务端，如果你是买来的你被骗了，请举报+退款，本服务端免费，倒卖者死全家.\\n" + //
-                "祝您游戏愉快";
+        public String signature = "输入 /help 以获取命令列表\n欢迎来到Amireux 星穹铁道1.6服务端，如果你是买来的你被骗了，请举报+退款，本服务端免费，倒卖者死全家.\n祝您游戏愉快";
         public int level = 114514;
         public int headIcon = 201302;
         public int chatBubbleId = 0;
@@ -138,18 +161,15 @@ public class Config {
         public List<ItemParam> attachments;
         
         public WelcomeMail() {
-            this.title = "欢迎来到Amireux星穹铁道1.5服务器.";
+            this.title = "欢迎来到Amireux星穹铁道1.6服务器.";
             this.sender = "Amireux";
-            this.content = "欢迎来到Amireux 星穹铁道1.5服务端\n如果你是买来的你被骗了，请举报+退款\n本服务端免费,倒卖者死全家,祝您游戏愉快！";
+            this.content = "欢迎来到Amireux 星穹铁道1.6服务端\n如果你是买来的你被骗了，请举报+退款\n本服务端免费,倒卖者死全家,祝您游戏愉快！";
             this.attachments = List.of(
                 new ItemParam(2, 1000000),
                 new ItemParam(101, 100),
                 new ItemParam(102, 100),
                 new ItemParam(1001, 1),
-                new ItemParam(1002, 1),
-                new ItemParam(1217, 1),
-                new ItemParam(1215, 1),
-                new ItemParam(1204, 1)
+                new ItemParam(1002, 1)
             );
         }
     }
@@ -164,10 +184,10 @@ public class Config {
     
     @Getter
     public static class DownloadData {
-        public String assetBundleUrl = null;
-        public String exResourceUrl = null;
-        public String luaUrl = null;
-        public String ifixUrl = null;
+        public String assetBundleUrl = "https://autopatchos.starrails.com/asb/V1.6Live/output_6229948_0844d00ce5";
+        public String exResourceUrl = "https://autopatchos.starrails.com/design_data/V1.6Live/output_6229971_b450b4ac62";
+        public String luaUrl = "https://autopatchos.starrails.com/lua/V1.6Live/output_6229948_0844d00ce5";
+        public String ifixUrl = "https://autopatchos.starrails.com/ifix/V1.6Live/output_6230171_e139aa52e7";
     }
 
 }

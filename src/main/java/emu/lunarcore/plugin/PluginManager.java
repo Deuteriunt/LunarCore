@@ -40,11 +40,11 @@ public final class PluginManager {
      */
     public void loadPlugins() throws IOException {
         if (this.pluginsLoaded)
-            throw new IllegalStateException("已加载插件.");
+            throw new IllegalStateException("Plugins have already been loaded.");
         this.pluginsLoaded = true;
 
         if (!PLUGINS_DIR.exists() && !PLUGINS_DIR.mkdirs())
-            throw new IOException("无法创建插件目录.");
+            throw new IOException("Failed to create plugins directory.");
 
         // Read files from the directory.
         var files = PLUGINS_DIR.listFiles();
@@ -67,7 +67,7 @@ public final class PluginManager {
             .filter(Objects::nonNull)
             .toArray(URL[]::new);
 
-        loadingExceptions.forEach(e -> this.getLogger().warn("插件加载失败: " + e.getMessage()));
+        loadingExceptions.forEach(e -> this.getLogger().warn("Failed to load plugin: " + e.getMessage()));
 
         // Begin loading plugins.
         var classLoader = new URLClassLoader(pluginURLs);
@@ -81,7 +81,7 @@ public final class PluginManager {
                 var jarReader = new URLClassLoader(new URL[] { pluginUrl });
                 var pluginConfigFile = jarReader.getResourceAsStream("plugin.json");
                 if (pluginConfigFile == null) {
-                    this.getLogger().warn("插件 {} 没有指定配置文件.", pluginFile.getName());
+                    this.getLogger().warn("Plugin {} did not specify a config file.", pluginFile.getName());
                     return;
                 }
 
@@ -89,21 +89,21 @@ public final class PluginManager {
                 var configReader = new InputStreamReader(pluginConfigFile);
                 var pluginConfig = JsonUtils.loadToClass(configReader, Plugin.Config.class);
                 if (pluginConfig == null) {
-                    this.getLogger().warn("插件 {} 配置文件无效.", pluginFile.getName());
+                    this.getLogger().warn("Plugin {} has an invalid config file.", pluginFile.getName());
                     return;
                 }
                 jarReader.close();
 
                 // Validate the plugin's configuration file.
                 if (pluginConfig.api() == null) {
-                    this.getLogger().warn("插件 {} 未指定 API 版本.", pluginFile.getName());
+                    this.getLogger().warn("Plugin {} did not specify an API version.", pluginFile.getName());
                     return;
                 } else if (pluginConfig.api() != API_VERSION) {
-                    this.getLogger().warn("插件 {} 需要使用 API 版本 {}，但该服务器正在运行版本 {}.",
+                    this.getLogger().warn("Plugin {} requires API version {}, but this server is running version {}.",
                         pluginFile.getName(), pluginConfig.api(), API_VERSION);
                     return;
                 } else if (!pluginConfig.validate()) {
-                    this.getLogger().warn("插件 {} 配置文件无效.", pluginFile.getName());
+                    this.getLogger().warn("Plugin {} has an invalid config file.", pluginFile.getName());
                     return;
                 }
 
@@ -144,10 +144,10 @@ public final class PluginManager {
                 } else try {
                     pluginInstance.onLoad();
                 } catch (Throwable exception) {
-                    this.getLogger().warn("插件加载失败 {}.", pluginFile.getName());
+                    this.getLogger().warn("Failed to load plugin {}.", pluginFile.getName());
                 }
             } catch (IOException | ClassNotFoundException e) {
-                this.getLogger().warn("插件加载失败 {}.", pluginFile.getName());
+                this.getLogger().warn("Failed to load plugin {}.", pluginFile.getName());
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException |
                      NoSuchMethodException e) {
                 throw new RuntimeException(e);
@@ -160,7 +160,7 @@ public final class PluginManager {
         while (!dependencies.isEmpty()) {
             // Check if the depth is too high.
             if (depth >= maxDepth) {
-                this.getLogger().warn("由于循环依赖关系，加载插件失败.");
+                this.getLogger().warn("Failed to load plugins due to circular dependencies.");
                 break;
             }
 
@@ -180,7 +180,7 @@ public final class PluginManager {
                 // Load the plugin.
                 pluginData.instance().onLoad();
             } catch (Throwable exception) {
-                this.getLogger().warn("插件加载失败 {}.", exception.getMessage());
+                this.getLogger().warn("Failed to load plugin {}.", exception.getMessage());
                 depth++;
             }
         }
@@ -192,13 +192,13 @@ public final class PluginManager {
     public void enablePlugins() {
         this.getPlugins().forEach((name, plugin) -> {
             try {
-                this.getLogger().info("启用插件 {}.", name);
+                this.getLogger().info("Enabling plugin {}.", name);
                 plugin.onEnable();
                 return;
             } catch (NoSuchMethodError | NoSuchFieldError ignored) {
-                this.getLogger().warn("插件 {} 不兼容此服务器版本.", name);
+                this.getLogger().warn("Plugin {} is not compatible with this server version.", name);
             } catch (Throwable exception) {
-                this.getLogger().warn("启用插件失败 {}.", name);
+                this.getLogger().warn("Failed to enable plugin {}.", name);
             }
 
             plugin.onDisable();
@@ -211,10 +211,10 @@ public final class PluginManager {
     public void disablePlugins() {
         this.getPlugins().forEach((name, plugin) -> {
             try {
-                this.getLogger().info("禁用插件 {}.", name);
+                this.getLogger().info("Disabling plugin {}.", name);
                 plugin.onDisable();
             } catch (Throwable exception) {
-                this.getLogger().warn("插件禁用失败 {}.", name);
+                this.getLogger().warn("Failed to disable plugin {}.", name);
             }
         });
     }

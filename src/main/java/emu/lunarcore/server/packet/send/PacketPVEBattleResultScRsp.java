@@ -31,9 +31,6 @@ public class PacketPVEBattleResultScRsp extends BasePacket {
 
         // Battle result
         var data = PVEBattleResultScRsp.newInstance()
-                .setUnk1(ItemList.newInstance())
-                .setUnk2(ItemList.newInstance())
-                .setUnk3(ItemList.newInstance())
                 .setDropData(dropData)
                 .setResVersion(Integer.toString(req.getClientResVersion()))
                 .setBinVersion("")
@@ -42,6 +39,11 @@ public class PacketPVEBattleResultScRsp extends BasePacket {
                 .setEndStatus(req.getEndStatus())
                 .setCheckIdentical(true);
 
+        // Set these
+        data.getMutableUnk1();
+        data.getMutableUnk2();
+        data.getMutableUnk3();
+        
         this.setData(data);
     }
 }

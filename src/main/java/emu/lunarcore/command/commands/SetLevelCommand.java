@@ -11,9 +11,8 @@ public class SetLevelCommand implements CommandHandler {
     @Override
     public void execute(CommandArgs args) {
         int targetLevel = Utils.parseSafeInt(args.get(0));
-
+        
         args.getTarget().setLevel(targetLevel);
-
         args.sendMessage("将开拓等级设置为 " + args.getTarget().getLevel());
     }
 

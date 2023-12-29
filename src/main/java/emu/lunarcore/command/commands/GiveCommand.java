@@ -18,7 +18,7 @@ import emu.lunarcore.util.Utils;
         aliases = {"g", "item"}, 
         permission = "player.give", 
         requireTarget = true, 
-        desc = "/give [物品id] x(数量) lv(等级) r(精炼等级) p(突破等级). 给与指定玩家指定物品"
+        desc = "/give [物品id] x(数量) lv(等级) r(精炼等级) p(突破等级). 给与指定玩家指定物品."
 )
 public class GiveCommand implements CommandHandler {
 

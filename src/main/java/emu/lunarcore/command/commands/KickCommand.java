@@ -6,7 +6,7 @@ import emu.lunarcore.command.CommandHandler;
 
 @Command(
     label = "kick",
-    desc = "/kick @[玩家uid]. 将指定玩家踢出服务器",
+    desc = "/kick @[玩家uid]. 将指定玩家踢出服务器.",
     requireTarget = true,
     permission = "player.kick"
 )
@@ -18,6 +18,6 @@ public final class KickCommand implements CommandHandler {
         args.getTarget().getSession().close();
 
         // Send message
-        args.sendMessage("Player kicked successfully");
+        args.sendMessage("已成功踢出玩家");
     }
 }

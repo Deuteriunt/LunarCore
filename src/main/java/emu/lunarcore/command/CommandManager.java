@@ -131,7 +131,7 @@ public class CommandManager {
             // Check if sender has permission to run the command.
             if (sender != null && !this.checkPermission(sender, command)) {
                 // We have a double null check here just in case
-                sender.sendMessage("您没有权限使用此命令.");
+                sender.sendMessage("You do not have permission to use this command.");
                 return;
             }
             
@@ -140,13 +140,13 @@ public class CommandManager {
             
             // Check targeted permission
             if (sender != cmdArgs.getTarget() && !this.checkTargetPermission(sender, command)) {
-                cmdArgs.sendMessage("您没有权限对其他玩家使用此命令.");
+                cmdArgs.sendMessage("You do not have permission to use this command on another player.");
                 return;
             }
             
             // Make sure our command has a target
             if (command.requireTarget() && cmdArgs.getTarget() == null) {
-                cmdArgs.sendMessage("错误：未找到目标玩家或已离线");
+                cmdArgs.sendMessage("Error: Targeted player not found or offline");
                 return;
             }
             
@@ -159,9 +159,9 @@ public class CommandManager {
             handler.execute(cmdArgs);
         } else {
             if (sender != null) {
-                sender.sendMessage("笨蛋输错指令了,再输错我会哭的!");
+                sender.sendMessage("Invalid Command!");
             } else {
-                LunarCore.getLogger().info("笨蛋输错指令了,再输错我会哭的!");
+                LunarCore.getLogger().info("Invalid Command!");
             }
         }
     }

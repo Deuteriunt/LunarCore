@@ -20,7 +20,7 @@ import emu.lunarcore.game.player.Player;
         aliases = {"ga"}, 
         permission = "player.give", 
         requireTarget = true, 
-        desc = "/giveall {materials (材料) | avatars (角色) | lightcones (光锥) | relics (遗器)} lv(等级). 给予玩家某种类型的所有物品."
+        desc = "/giveall {materials (材料) | avatars (角色) | lightcones (光锥) | relics (遗器) | usables} lv(等级). 给予玩家某种类型的所有物品."
 )
 public class GiveAllCommand implements CommandHandler {
 
@@ -38,12 +38,12 @@ public class GiveAllCommand implements CommandHandler {
                 for (ItemExcel excel : GameData.getItemExcelMap().values()) {
                     int purpose = excel.getPurposeType();
                     if ((purpose >= 1 && purpose <= 7) || purpose == 10) {
-                        items.add(new GameItem(excel, excel.getPileLimit()));
+                        items.add(new GameItem(excel, 10_000));
                     }
                 }
 
                 // Credits
-                items.add(new GameItem(2, Integer.MAX_VALUE));
+                items.add(new GameItem(2, 100_000_000));
 
                 // Add to target's inventory
                 target.getInventory().addItems(items, true);
@@ -147,15 +147,24 @@ public class GiveAllCommand implements CommandHandler {
                 // Send message
                 args.sendMessage("Giving " + target.getName() + " all avatars");
             }
-            case "ic", "icons" -> {
-                // Get UnlockedHeads
-                for (var iconhead : GameData.getPlayerIconExcelMap().values()) {
-                    // This function will handle any duplicate head icons
-                    target.addHeadIcon(iconhead.getId());
+            case "unlocks", "usables", "icons" -> {
+                // Add head icons - Duplicates are handled automatically
+                for (var excel : GameData.getPlayerIconExcelMap().values()) {
+                    target.getUnlocks().addHeadIcon(excel.getId());
                 }
-
+                
+                // Add chat bubbles - Duplicates are handled automatically
+                for (var excel : GameData.getChatBubbleExcelMap().values()) {
+                    target.getUnlocks().addChatBubble(excel.getId());
+                }
+                
+                // Add phone themes - Duplicates are handled automatically
+                for (var excel : GameData.getPhoneThemeExcelMap().values()) {
+                    target.getUnlocks().addPhoneTheme(excel.getId());
+                }
+                
                 // Send message
-                args.sendMessage("Added all icons to " + target.getName());
+                args.sendMessage("Added all icons/chat bubbles/phone themes to " + target.getName());
             }
             case "consumables", "food" -> {
                 // Get consumables
