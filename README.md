@@ -1,4 +1,4 @@
-![LunarCore](https://socialify.git.ci/Melledy/LunarCore/image?description=1&descriptionEditable=A%20game%20server%20reimplementation%20for%20version%201.5.0%20of%20a%20certain%20turn-based%20anime%20game%20for%20educational%20purposes.%20&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pulls=1&stargazers=1&theme=Light)
+![LunarCore](https://socialify.git.ci/serendipitk/LunarCore/image?description=1&descriptionEditable=A%20game%20server%20reimplementation%20for%20version%201.6.0%20of%20a%20certain%20turn-based%20anime%20game%20for%20educational%20purposes.%20&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pulls=1&stargazers=1&theme=Light)
 <div align="center"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/Melledy/LunarCore?logo=java&style=for-the-badge"> <img alt="GitHub" src="https://img.shields.io/github/license/Melledy/LunarCore?style=for-the-badge"> <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Melledy/LunarCore?style=for-the-badge"> <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Melledy/LunarCore/build.yml?branch=development&logo=github&style=for-the-badge"></div>
 
 <div align="center"><a href="https://discord.gg/cfPKJ6N5hw"><img alt="Discord - Grasscutter" src="https://img.shields.io/discord/1163718404067303444?label=Discord&logo=discord&style=for-the-badge"></a></div>
@@ -13,12 +13,12 @@
 - Natural world monster/prop/NPC spawns
 - Character techniques
 - Crafting/Consumables working
-- Npc shops handled
+- NPC shops handled
 - Gacha system
 - Mail system
 - Friend system (Assists are not working yet)
 - Forgotten hall
-- Simulated universe (Runs can be finished, but many features are missing)
+-  ~~Simulated universe (Runs can be finished, but many features are missing)~~
 
 # Running the server and client
 
@@ -37,7 +37,7 @@
 6. If you have `autoCreateAccount` set to true in the config, then you can skip creating an account. Otherwise, use the `/account` command in the server console to create one.
 
 ### Connecting with the client (Fiddler)
-1. **Login with the client to an official server and Hoyoverse account at least once to download game data.**
+1. **Log in with the client to an official server and Hoyoverse account at least once to download game data.**
 2. Install and have [Fiddler Classic](https://www.telerik.com/fiddler) running.
 3. Set fiddler to decrypt https traffic. (Tools -> Options -> HTTPS -> Decrypt HTTPS traffic) Make sure `ignore server certificate errors` is checked as well.
 4. Copy and paste the following code into the Fiddlerscript tab of Fiddler Classic:
@@ -67,7 +67,7 @@ Server commands can be run in the server console or in-game. There is a dummy us
 /account {create | delete} [username] (reserved player uid). Creates or deletes an account.
 /avatar lv(level) p(ascension) r(eidolon) s(skill levels). Sets the current avatar's properties.
 /clear {relics | lightcones | materials | items}. Removes filtered items from the player inventory.
-/gender {male | female}. Sets the player gender.
+/gender {male | female}. Sets the player's gender.
 /give [item id] x[amount] lv[number]. Gives the targetted player an item.
 /giveall {materials | avatars | lightcones | relics}. Gives the targeted player items.
 /heal. Heals your avatars.
@@ -79,6 +79,6 @@ Server commands can be run in the server console or in-game. There is a dummy us
 /reload. Reloads the server config.
 /scene [scene id] [floor id]. Teleports the player to the specified scene.
 /spawn [monster/prop id] x[amount] s[stage id]. Spawns a monster or prop near the targeted player.
-/unstuck @[player id]. Unstucks an offline player if theyre in a scene that doesnt load.
+/unstuck @[player id]. Unstucks an offline player if they're in a scene that doesn't load.
 /worldlevel [world level]. Sets the targeted player's equilibrium level.
 ```

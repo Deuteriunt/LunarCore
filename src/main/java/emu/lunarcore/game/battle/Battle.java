@@ -6,7 +6,6 @@ import java.util.List;
 
 import emu.lunarcore.GameConstants;
 import emu.lunarcore.data.GameData;
-import emu.lunarcore.data.excel.MazeBuffExcel;
 import emu.lunarcore.data.excel.StageExcel;
 import emu.lunarcore.game.avatar.GameAvatar;
 import emu.lunarcore.game.inventory.GameItem;
@@ -138,15 +137,16 @@ public class Battle {
     
     // Battle buffs
     
+    public MazeBuff addBuff(int buffId) {
+        return addBuff(buffId, -1, 0xffffffff);
+    }
+    
     public MazeBuff addBuff(int buffId, int ownerIndex) {
         return addBuff(buffId, ownerIndex, 0xffffffff);
     }
     
     public MazeBuff addBuff(int buffId, int ownerIndex, int waveFlag) {
-        MazeBuffExcel excel = GameData.getMazeBuffExcel(buffId, 1);
-        if (excel == null) return null;
-        
-        MazeBuff buff = new MazeBuff(excel, ownerIndex, waveFlag);
+        MazeBuff buff = new MazeBuff(buffId, 1, ownerIndex, waveFlag);
         return addBuff(buff);
     }
     

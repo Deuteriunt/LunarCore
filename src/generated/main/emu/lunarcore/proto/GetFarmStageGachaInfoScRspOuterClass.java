@@ -12,35 +12,35 @@ import us.hebi.quickbuf.ProtoSink;
 import us.hebi.quickbuf.ProtoSource;
 import us.hebi.quickbuf.RepeatedMessage;
 
-public final class GetMainMissionCustomValueScRspOuterClass {
+public final class GetFarmStageGachaInfoScRspOuterClass {
   /**
-   * Protobuf type {@code GetMainMissionCustomValueScRsp}
+   * Protobuf type {@code GetFarmStageGachaInfoScRsp}
    */
-  public static final class GetMainMissionCustomValueScRsp extends ProtoMessage<GetMainMissionCustomValueScRsp> implements Cloneable {
+  public static final class GetFarmStageGachaInfoScRsp extends ProtoMessage<GetFarmStageGachaInfoScRsp> implements Cloneable {
     private static final long serialVersionUID = 0L;
 
     /**
-     * <code>optional uint32 retcode = 2;</code>
+     * <code>optional uint32 retcode = 12;</code>
      */
     private int retcode;
 
     /**
-     * <code>repeated .MainMission main_mission_list = 5;</code>
+     * <code>repeated .FarmStageGachaInfo farm_stage_gacha_info_list = 10;</code>
      */
-    private final RepeatedMessage<MainMissionOuterClass.MainMission> mainMissionList = RepeatedMessage.newEmptyInstance(MainMissionOuterClass.MainMission.getFactory());
+    private final RepeatedMessage<FarmStageGachaInfoOuterClass.FarmStageGachaInfo> farmStageGachaInfoList = RepeatedMessage.newEmptyInstance(FarmStageGachaInfoOuterClass.FarmStageGachaInfo.getFactory());
 
-    private GetMainMissionCustomValueScRsp() {
+    private GetFarmStageGachaInfoScRsp() {
     }
 
     /**
-     * @return a new empty instance of {@code GetMainMissionCustomValueScRsp}
+     * @return a new empty instance of {@code GetFarmStageGachaInfoScRsp}
      */
-    public static GetMainMissionCustomValueScRsp newInstance() {
-      return new GetMainMissionCustomValueScRsp();
+    public static GetFarmStageGachaInfoScRsp newInstance() {
+      return new GetFarmStageGachaInfoScRsp();
     }
 
     /**
-     * <code>optional uint32 retcode = 2;</code>
+     * <code>optional uint32 retcode = 12;</code>
      * @return whether the retcode field is set
      */
     public boolean hasRetcode() {
@@ -48,17 +48,17 @@ public final class GetMainMissionCustomValueScRspOuterClass {
     }
 
     /**
-     * <code>optional uint32 retcode = 2;</code>
+     * <code>optional uint32 retcode = 12;</code>
      * @return this
      */
-    public GetMainMissionCustomValueScRsp clearRetcode() {
+    public GetFarmStageGachaInfoScRsp clearRetcode() {
       bitField0_ &= ~0x00000001;
       retcode = 0;
       return this;
     }
 
     /**
-     * <code>optional uint32 retcode = 2;</code>
+     * <code>optional uint32 retcode = 12;</code>
      * @return the retcode
      */
     public int getRetcode() {
@@ -66,50 +66,51 @@ public final class GetMainMissionCustomValueScRspOuterClass {
     }
 
     /**
-     * <code>optional uint32 retcode = 2;</code>
+     * <code>optional uint32 retcode = 12;</code>
      * @param value the retcode to set
      * @return this
      */
-    public GetMainMissionCustomValueScRsp setRetcode(final int value) {
+    public GetFarmStageGachaInfoScRsp setRetcode(final int value) {
       bitField0_ |= 0x00000001;
       retcode = value;
       return this;
     }
 
     /**
-     * <code>repeated .MainMission main_mission_list = 5;</code>
-     * @return whether the mainMissionList field is set
+     * <code>repeated .FarmStageGachaInfo farm_stage_gacha_info_list = 10;</code>
+     * @return whether the farmStageGachaInfoList field is set
      */
-    public boolean hasMainMissionList() {
+    public boolean hasFarmStageGachaInfoList() {
       return (bitField0_ & 0x00000002) != 0;
     }
 
     /**
-     * <code>repeated .MainMission main_mission_list = 5;</code>
+     * <code>repeated .FarmStageGachaInfo farm_stage_gacha_info_list = 10;</code>
      * @return this
      */
-    public GetMainMissionCustomValueScRsp clearMainMissionList() {
+    public GetFarmStageGachaInfoScRsp clearFarmStageGachaInfoList() {
       bitField0_ &= ~0x00000002;
-      mainMissionList.clear();
+      farmStageGachaInfoList.clear();
       return this;
     }
 
     /**
-     * <code>repeated .MainMission main_mission_list = 5;</code>
+     * <code>repeated .FarmStageGachaInfo farm_stage_gacha_info_list = 10;</code>
      *
      * This method returns the internal storage object without modifying any has state.
      * The returned object should not be modified and be treated as read-only.
      *
-     * Use {@link #getMutableMainMissionList()} if you want to modify it.
+     * Use {@link #getMutableFarmStageGachaInfoList()} if you want to modify it.
      *
      * @return internal storage object for reading
      */
-    public RepeatedMessage<MainMissionOuterClass.MainMission> getMainMissionList() {
-      return mainMissionList;
+    public RepeatedMessage<FarmStageGachaInfoOuterClass.FarmStageGachaInfo> getFarmStageGachaInfoList(
+        ) {
+      return farmStageGachaInfoList;
     }
 
     /**
-     * <code>repeated .MainMission main_mission_list = 5;</code>
+     * <code>repeated .FarmStageGachaInfo farm_stage_gacha_info_list = 10;</code>
      *
      * This method returns the internal storage object and sets the corresponding
      * has state. The returned object will become part of this message and its
@@ -117,48 +118,49 @@ public final class GetMainMissionCustomValueScRspOuterClass {
      *
      * @return internal storage object for modifications
      */
-    public RepeatedMessage<MainMissionOuterClass.MainMission> getMutableMainMissionList() {
+    public RepeatedMessage<FarmStageGachaInfoOuterClass.FarmStageGachaInfo> getMutableFarmStageGachaInfoList(
+        ) {
       bitField0_ |= 0x00000002;
-      return mainMissionList;
+      return farmStageGachaInfoList;
     }
 
     /**
-     * <code>repeated .MainMission main_mission_list = 5;</code>
-     * @param value the mainMissionList to add
+     * <code>repeated .FarmStageGachaInfo farm_stage_gacha_info_list = 10;</code>
+     * @param value the farmStageGachaInfoList to add
      * @return this
      */
-    public GetMainMissionCustomValueScRsp addMainMissionList(
-        final MainMissionOuterClass.MainMission value) {
+    public GetFarmStageGachaInfoScRsp addFarmStageGachaInfoList(
+        final FarmStageGachaInfoOuterClass.FarmStageGachaInfo value) {
       bitField0_ |= 0x00000002;
-      mainMissionList.add(value);
+      farmStageGachaInfoList.add(value);
       return this;
     }
 
     /**
-     * <code>repeated .MainMission main_mission_list = 5;</code>
-     * @param values the mainMissionList to add
+     * <code>repeated .FarmStageGachaInfo farm_stage_gacha_info_list = 10;</code>
+     * @param values the farmStageGachaInfoList to add
      * @return this
      */
-    public GetMainMissionCustomValueScRsp addAllMainMissionList(
-        final MainMissionOuterClass.MainMission... values) {
+    public GetFarmStageGachaInfoScRsp addAllFarmStageGachaInfoList(
+        final FarmStageGachaInfoOuterClass.FarmStageGachaInfo... values) {
       bitField0_ |= 0x00000002;
-      mainMissionList.addAll(values);
+      farmStageGachaInfoList.addAll(values);
       return this;
     }
 
     @Override
-    public GetMainMissionCustomValueScRsp copyFrom(final GetMainMissionCustomValueScRsp other) {
+    public GetFarmStageGachaInfoScRsp copyFrom(final GetFarmStageGachaInfoScRsp other) {
       cachedSize = other.cachedSize;
       if ((bitField0_ | other.bitField0_) != 0) {
         bitField0_ = other.bitField0_;
         retcode = other.retcode;
-        mainMissionList.copyFrom(other.mainMissionList);
+        farmStageGachaInfoList.copyFrom(other.farmStageGachaInfoList);
       }
       return this;
     }
 
     @Override
-    public GetMainMissionCustomValueScRsp mergeFrom(final GetMainMissionCustomValueScRsp other) {
+    public GetFarmStageGachaInfoScRsp mergeFrom(final GetFarmStageGachaInfoScRsp other) {
       if (other.isEmpty()) {
         return this;
       }
@@ -166,32 +168,32 @@ public final class GetMainMissionCustomValueScRspOuterClass {
       if (other.hasRetcode()) {
         setRetcode(other.retcode);
       }
-      if (other.hasMainMissionList()) {
-        getMutableMainMissionList().addAll(other.mainMissionList);
+      if (other.hasFarmStageGachaInfoList()) {
+        getMutableFarmStageGachaInfoList().addAll(other.farmStageGachaInfoList);
       }
       return this;
     }
 
     @Override
-    public GetMainMissionCustomValueScRsp clear() {
+    public GetFarmStageGachaInfoScRsp clear() {
       if (isEmpty()) {
         return this;
       }
       cachedSize = -1;
       bitField0_ = 0;
       retcode = 0;
-      mainMissionList.clear();
+      farmStageGachaInfoList.clear();
       return this;
     }
 
     @Override
-    public GetMainMissionCustomValueScRsp clearQuick() {
+    public GetFarmStageGachaInfoScRsp clearQuick() {
       if (isEmpty()) {
         return this;
       }
       cachedSize = -1;
       bitField0_ = 0;
-      mainMissionList.clearQuick();
+      farmStageGachaInfoList.clearQuick();
       return this;
     }
 
@@ -200,25 +202,25 @@ public final class GetMainMissionCustomValueScRspOuterClass {
       if (o == this) {
         return true;
       }
-      if (!(o instanceof GetMainMissionCustomValueScRsp)) {
+      if (!(o instanceof GetFarmStageGachaInfoScRsp)) {
         return false;
       }
-      GetMainMissionCustomValueScRsp other = (GetMainMissionCustomValueScRsp) o;
+      GetFarmStageGachaInfoScRsp other = (GetFarmStageGachaInfoScRsp) o;
       return bitField0_ == other.bitField0_
         && (!hasRetcode() || retcode == other.retcode)
-        && (!hasMainMissionList() || mainMissionList.equals(other.mainMissionList));
+        && (!hasFarmStageGachaInfoList() || farmStageGachaInfoList.equals(other.farmStageGachaInfoList));
     }
 
     @Override
     public void writeTo(final ProtoSink output) throws IOException {
       if ((bitField0_ & 0x00000001) != 0) {
-        output.writeRawByte((byte) 16);
+        output.writeRawByte((byte) 96);
         output.writeUInt32NoTag(retcode);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        for (int i = 0; i < mainMissionList.length(); i++) {
-          output.writeRawByte((byte) 42);
-          output.writeMessageNoTag(mainMissionList.get(i));
+        for (int i = 0; i < farmStageGachaInfoList.length(); i++) {
+          output.writeRawByte((byte) 82);
+          output.writeMessageNoTag(farmStageGachaInfoList.get(i));
         }
       }
     }
@@ -230,30 +232,30 @@ public final class GetMainMissionCustomValueScRspOuterClass {
         size += 1 + ProtoSink.computeUInt32SizeNoTag(retcode);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        size += (1 * mainMissionList.length()) + ProtoSink.computeRepeatedMessageSizeNoTag(mainMissionList);
+        size += (1 * farmStageGachaInfoList.length()) + ProtoSink.computeRepeatedMessageSizeNoTag(farmStageGachaInfoList);
       }
       return size;
     }
 
     @Override
     @SuppressWarnings("fallthrough")
-    public GetMainMissionCustomValueScRsp mergeFrom(final ProtoSource input) throws IOException {
+    public GetFarmStageGachaInfoScRsp mergeFrom(final ProtoSource input) throws IOException {
       // Enabled Fall-Through Optimization (QuickBuffers)
       int tag = input.readTag();
       while (true) {
         switch (tag) {
-          case 16: {
+          case 96: {
             // retcode
             retcode = input.readUInt32();
             bitField0_ |= 0x00000001;
             tag = input.readTag();
-            if (tag != 42) {
+            if (tag != 82) {
               break;
             }
           }
-          case 42: {
-            // mainMissionList
-            tag = input.readRepeatedMessage(mainMissionList, tag);
+          case 82: {
+            // farmStageGachaInfoList
+            tag = input.readRepeatedMessage(farmStageGachaInfoList, tag);
             bitField0_ |= 0x00000002;
             if (tag != 0) {
               break;
@@ -280,13 +282,13 @@ public final class GetMainMissionCustomValueScRspOuterClass {
         output.writeUInt32(FieldNames.retcode, retcode);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        output.writeRepeatedMessage(FieldNames.mainMissionList, mainMissionList);
+        output.writeRepeatedMessage(FieldNames.farmStageGachaInfoList, farmStageGachaInfoList);
       }
       output.endObject();
     }
 
     @Override
-    public GetMainMissionCustomValueScRsp mergeFrom(final JsonSource input) throws IOException {
+    public GetFarmStageGachaInfoScRsp mergeFrom(final JsonSource input) throws IOException {
       if (!input.beginObject()) {
         return this;
       }
@@ -303,11 +305,11 @@ public final class GetMainMissionCustomValueScRspOuterClass {
             }
             break;
           }
-          case -1352596271:
-          case 939604023: {
-            if (input.isAtField(FieldNames.mainMissionList)) {
+          case 981089926:
+          case 758978696: {
+            if (input.isAtField(FieldNames.farmStageGachaInfoList)) {
               if (!input.trySkipNullValue()) {
-                input.readRepeatedMessage(mainMissionList);
+                input.readRepeatedMessage(farmStageGachaInfoList);
                 bitField0_ |= 0x00000002;
               }
             } else {
@@ -326,8 +328,8 @@ public final class GetMainMissionCustomValueScRspOuterClass {
     }
 
     @Override
-    public GetMainMissionCustomValueScRsp clone() {
-      return new GetMainMissionCustomValueScRsp().copyFrom(this);
+    public GetFarmStageGachaInfoScRsp clone() {
+      return new GetFarmStageGachaInfoScRsp().copyFrom(this);
     }
 
     @Override
@@ -335,34 +337,32 @@ public final class GetMainMissionCustomValueScRspOuterClass {
       return ((bitField0_) == 0);
     }
 
-    public static GetMainMissionCustomValueScRsp parseFrom(final byte[] data) throws
+    public static GetFarmStageGachaInfoScRsp parseFrom(final byte[] data) throws
         InvalidProtocolBufferException {
-      return ProtoMessage.mergeFrom(new GetMainMissionCustomValueScRsp(), data).checkInitialized();
+      return ProtoMessage.mergeFrom(new GetFarmStageGachaInfoScRsp(), data).checkInitialized();
     }
 
-    public static GetMainMissionCustomValueScRsp parseFrom(final ProtoSource input) throws
-        IOException {
-      return ProtoMessage.mergeFrom(new GetMainMissionCustomValueScRsp(), input).checkInitialized();
+    public static GetFarmStageGachaInfoScRsp parseFrom(final ProtoSource input) throws IOException {
+      return ProtoMessage.mergeFrom(new GetFarmStageGachaInfoScRsp(), input).checkInitialized();
     }
 
-    public static GetMainMissionCustomValueScRsp parseFrom(final JsonSource input) throws
-        IOException {
-      return ProtoMessage.mergeFrom(new GetMainMissionCustomValueScRsp(), input).checkInitialized();
+    public static GetFarmStageGachaInfoScRsp parseFrom(final JsonSource input) throws IOException {
+      return ProtoMessage.mergeFrom(new GetFarmStageGachaInfoScRsp(), input).checkInitialized();
     }
 
     /**
-     * @return factory for creating GetMainMissionCustomValueScRsp messages
+     * @return factory for creating GetFarmStageGachaInfoScRsp messages
      */
-    public static MessageFactory<GetMainMissionCustomValueScRsp> getFactory() {
-      return GetMainMissionCustomValueScRspFactory.INSTANCE;
+    public static MessageFactory<GetFarmStageGachaInfoScRsp> getFactory() {
+      return GetFarmStageGachaInfoScRspFactory.INSTANCE;
     }
 
-    private enum GetMainMissionCustomValueScRspFactory implements MessageFactory<GetMainMissionCustomValueScRsp> {
+    private enum GetFarmStageGachaInfoScRspFactory implements MessageFactory<GetFarmStageGachaInfoScRsp> {
       INSTANCE;
 
       @Override
-      public GetMainMissionCustomValueScRsp create() {
-        return GetMainMissionCustomValueScRsp.newInstance();
+      public GetFarmStageGachaInfoScRsp create() {
+        return GetFarmStageGachaInfoScRsp.newInstance();
       }
     }
 
@@ -372,7 +372,7 @@ public final class GetMainMissionCustomValueScRspOuterClass {
     static class FieldNames {
       static final FieldName retcode = FieldName.forField("retcode");
 
-      static final FieldName mainMissionList = FieldName.forField("mainMissionList", "main_mission_list");
+      static final FieldName farmStageGachaInfoList = FieldName.forField("farmStageGachaInfoList", "farm_stage_gacha_info_list");
     }
   }
 }

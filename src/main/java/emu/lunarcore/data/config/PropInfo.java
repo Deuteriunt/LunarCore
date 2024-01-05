@@ -24,8 +24,9 @@ public class PropInfo extends ObjectInfo {
     private int EventID;
     private int CocoonID;
     private int FarmElementID;
-    private PropValueSource ValueSource;
+    private boolean IsClientOnly;
     
+    @Setter private PropValueSource ValueSource;
     @Setter private String InitLevelGraph;
     @Setter private PropState State = PropState.Closed;
     

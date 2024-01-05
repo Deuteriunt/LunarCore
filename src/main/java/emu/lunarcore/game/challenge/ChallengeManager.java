@@ -12,6 +12,8 @@ import emu.lunarcore.game.player.BasePlayerManager;
 import emu.lunarcore.game.player.Player;
 import emu.lunarcore.game.player.lineup.PlayerLineup;
 import emu.lunarcore.proto.ExtraLineupTypeOuterClass.ExtraLineupType;
+import emu.lunarcore.proto.StartChallengeStoryBuffInfoOuterClass.StartChallengeStoryBuffInfo;
+import emu.lunarcore.server.packet.Retcode;
 import emu.lunarcore.server.packet.send.PacketStartChallengeScRsp;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -28,11 +30,11 @@ public class ChallengeManager extends BasePlayerManager {
         this.takenRewards = new Int2ObjectOpenHashMap<>();
     }
     
-    public void startChallenge(int challengeId) {
+    public void startChallenge(int challengeId, StartChallengeStoryBuffInfo storyBuffs) {
         // Get challenge excel
         ChallengeExcel excel = GameData.getChallengeExcelMap().get(challengeId);
         if (excel == null) {
-            getPlayer().sendPacket(new PacketStartChallengeScRsp());
+            getPlayer().sendPacket(new PacketStartChallengeScRsp(Retcode.CHALLENGE_NOT_EXIST));
             return;
         }
         
@@ -41,7 +43,10 @@ public class ChallengeManager extends BasePlayerManager {
             // Get lineup
             PlayerLineup lineup = getPlayer().getLineupManager().getExtraLineupByType(ExtraLineupType.LINEUP_CHALLENGE_VALUE);
             // Make sure this lineup has avatars set
-            if (lineup.getAvatars().size() == 0) return;
+            if (lineup.getAvatars().size() == 0) {
+                getPlayer().sendPacket(new PacketStartChallengeScRsp(Retcode.CHALLENGE_LINEUP_EMPTY));
+                return;
+            }
             // Reset hp/sp
             lineup.forEachAvatar(avatar -> {
                 avatar.setCurrentHp(lineup, 10000);
@@ -55,7 +60,10 @@ public class ChallengeManager extends BasePlayerManager {
             // Get lineup
             PlayerLineup lineup = getPlayer().getLineupManager().getExtraLineupByType(ExtraLineupType.LINEUP_CHALLENGE_2_VALUE);
             // Make sure this lineup has avatars set
-            if (lineup.getAvatars().size() == 0) return;
+            if (lineup.getAvatars().size() == 0) {
+                getPlayer().sendPacket(new PacketStartChallengeScRsp(Retcode.CHALLENGE_LINEUP_EMPTY));
+                return;
+            }
             // Reset hp/sp
             lineup.forEachAvatar(avatar -> {
                 avatar.setCurrentHp(lineup, 10000);
@@ -68,7 +76,7 @@ public class ChallengeManager extends BasePlayerManager {
         // Set challenge data for player
         ChallengeInstance instance = new ChallengeInstance(getPlayer(), excel);
         getPlayer().setChallengeInstance(instance);
-        
+
         // Set first lineup before we enter scenes
         getPlayer().getLineupManager().setCurrentExtraLineup(instance.getCurrentExtraLineup(), false);
         
@@ -79,7 +87,7 @@ public class ChallengeManager extends BasePlayerManager {
             getPlayer().getLineupManager().setCurrentExtraLineup(0, false);
             getPlayer().setChallengeInstance(null);
             // Send error packet
-            getPlayer().sendPacket(new PacketStartChallengeScRsp());
+            getPlayer().sendPacket(new PacketStartChallengeScRsp(Retcode.CHALLENGE_NOT_EXIST));
             return;
         }
         
@@ -87,6 +95,12 @@ public class ChallengeManager extends BasePlayerManager {
         instance.getStartPos().set(getPlayer().getPos());
         instance.getStartRot().set(getPlayer().getRot());
         instance.setSavedMp(getPlayer().getCurrentLineup().getMp());
+        
+        // Set story buffs
+        if (excel.isStory() && storyBuffs != null) {
+            instance.addStoryBuff(storyBuffs.getStoryBuffOne());
+            instance.addStoryBuff(storyBuffs.getStoryBuffTwo());
+        }
 
         // Send packet
         getPlayer().sendPacket(new PacketStartChallengeScRsp(getPlayer(), challengeId));

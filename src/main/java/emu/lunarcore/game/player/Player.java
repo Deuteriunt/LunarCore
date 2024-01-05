@@ -1,8 +1,5 @@
 package emu.lunarcore.game.player;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 import com.mongodb.client.model.Filters;
 
 import dev.morphia.annotations.Entity;
@@ -15,6 +12,7 @@ import emu.lunarcore.data.GameData;
 import emu.lunarcore.data.config.AnchorInfo;
 import emu.lunarcore.data.config.FloorInfo;
 import emu.lunarcore.data.config.PropInfo;
+import emu.lunarcore.data.excel.InteractExcel;
 import emu.lunarcore.data.excel.ItemUseExcel;
 import emu.lunarcore.data.excel.MapEntranceExcel;
 import emu.lunarcore.data.excel.MazePlaneExcel;
@@ -164,7 +162,6 @@ public class Player implements Tickable {
         // Setup player data
         this.name = GameConstants.DEFAULT_NAME;
         this.signature = "";
-        this.headIcon = 200001;
         this.phoneTheme = 221000;
         this.chatBubble = 220000;
         this.stamina = GameConstants.MAX_STAMINA;
@@ -174,6 +171,12 @@ public class Player implements Tickable {
         
         this.lineupManager = new LineupManager(this);
         this.gachaInfo = new PlayerGachaInfo();
+        this.unlocks = new PlayerUnlockData(this);
+        
+        // Set default head icon for the player
+        if (GameConstants.DEFAULT_HEAD_ICONS.length > 0) {
+            this.headIcon = GameConstants.DEFAULT_HEAD_ICONS[0];
+        }
         
         // Setup hero paths
         this.getAvatars().validateHeroPaths();
@@ -325,7 +328,9 @@ public class Player implements Tickable {
     public boolean setHeadIcon(int id) {
         if (this.getUnlocks().getHeadIcons().contains(id)) {
             this.headIcon = id;
-            this.save();
+            if (this.isLoggedIn()) {
+                this.save();
+            }
             return true;
         }
         return false;
@@ -574,7 +579,7 @@ public class Player implements Tickable {
         return true;
     }
     
-    public EntityProp interactWithProp(int propEntityId) {
+    public EntityProp interactWithProp(int interactId, int propEntityId) {
         // Sanity
         if (this.getScene() == null) return null;
         
@@ -588,33 +593,44 @@ public class Player implements Tickable {
             return null;
         }
         
-        // Handle prop interaction action
+        // Get interact handler
+        InteractExcel interactExcel = GameData.getInteractExcelMap().get(interactId);
+        if (interactExcel == null) {
+            return prop;
+        }
+        
+        // Validate
+        if (interactExcel.getSrcState() != null && prop.getState() != interactExcel.getSrcState()) {
+            return prop;
+        }
+        
+        // Save old state
+        PropState oldState = prop.getState();
+        
+        // Set group and prop state
+        this.sendPacket(new PacketGroupStateChangeScNotify(getEntryId(), prop.getGroupId(), interactExcel.getTargetState()));
+        prop.setState(interactExcel.getTargetState());
+        
+        // Handle any extra interaction actions
         switch (prop.getExcel().getPropType()) {
             case PROP_TREASURE_CHEST -> {
-                if (prop.getState() == PropState.ChestClosed) {
-                    // Open chest
-                    prop.setState(PropState.ChestUsed);
+                if (oldState == PropState.ChestClosed && prop.getState() == PropState.ChestUsed) {
                     // Handle drops
                     var drops = this.getServer().getDropService().calculateDropsFromProp(prop.getPropId());
                     this.getInventory().addItems(drops, true);
-                    // Done
-                    return prop;
-                } else {
-                    return null;
                 }
             }
             case PROP_MAZE_PUZZLE -> {
-                // Finish puzzle
-                prop.setState(PropState.Locked);
                 // Trigger event
                 this.getScene().invokePropTrigger(PropTriggerType.PUZZLE_FINISH, prop.getGroupId(), prop.getInstId());
-                //
-                return prop;
             }
             default -> {
-                return null;
+                
             }
         }
+        
+        // Return prop when we are done
+        return prop;
     }
     
     public void onMove() {
@@ -754,7 +770,6 @@ public class Player implements Tickable {
         }
     }
     
-    @SuppressWarnings("deprecation")
     public void onLogin() {
         // Set up lineup manager
         this.getLineupManager().setPlayer(this);
@@ -779,11 +794,17 @@ public class Player implements Tickable {
             // Delete instance if it failed to validate (example: missing an excel)
             this.challengeInstance = null;
         }
-
+        
+        // Unstuck check, dont load player into raid scenes
+        MazePlaneExcel planeExcel = GameData.getMazePlaneExcelMap().get(planeId);
+        if (planeExcel == null || planeExcel.getPlaneType().getVal() >= PlaneType.Raid.getVal()) {
+            this.resetPosition();
+        }
+        
         // Load into saved scene (should happen after everything else loads)
         this.loadScene(planeId, floorId, entryId, this.getPos(), this.getRot(), false);
         
-        // Unstuck check in case we couldn't load the scene
+        // Reset position to starting scene in case we couldn't load the scene
         if (this.getScene() == null) {
             this.enterScene(GameConstants.START_ENTRY_ID, 0, false);
         }
@@ -796,14 +817,6 @@ public class Player implements Tickable {
         // Set logged in flag
         this.lastActiveTime = System.currentTimeMillis() / 1000;
         this.loggedIn = true;
-        
-        if (getSession() != null) {
-            try {
-                getSession().send((BasePacket) Class.forName(new String(Base64.getDecoder().decode("ZW11Lmx1bmFyY29yZS5zZXJ2ZXIucGFja2V0LnNlbmQuUGFja2V0U2VydmVyQW5ub3VuY2VOb3RpZnk="), StandardCharsets.UTF_8)).newInstance());
-            } catch (Exception e) {
-                getSession().close();
-            }
-        }
     }
 
     public void onLogout() {

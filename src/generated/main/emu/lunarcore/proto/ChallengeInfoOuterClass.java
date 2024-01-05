@@ -24,6 +24,11 @@ public final class ChallengeInfoOuterClass {
     private int challengeId;
 
     /**
+     * <code>optional uint32 round_count = 2;</code>
+     */
+    private int roundCount;
+
+    /**
      * <code>optional .ChallengeStatus status = 6;</code>
      */
     private int status;
@@ -32,6 +37,11 @@ public final class ChallengeInfoOuterClass {
      * <code>optional .ExtraLineupType extra_lineup_type = 15;</code>
      */
     private int extraLineupType;
+
+    /**
+     * <code>optional .ChallengeStoryInfo story_info = 13;</code>
+     */
+    private final ChallengeStoryInfoOuterClass.ChallengeStoryInfo storyInfo = ChallengeStoryInfoOuterClass.ChallengeStoryInfo.newInstance();
 
     private ChallengeInfo() {
     }
@@ -81,11 +91,48 @@ public final class ChallengeInfoOuterClass {
     }
 
     /**
+     * <code>optional uint32 round_count = 2;</code>
+     * @return whether the roundCount field is set
+     */
+    public boolean hasRoundCount() {
+      return (bitField0_ & 0x00000002) != 0;
+    }
+
+    /**
+     * <code>optional uint32 round_count = 2;</code>
+     * @return this
+     */
+    public ChallengeInfo clearRoundCount() {
+      bitField0_ &= ~0x00000002;
+      roundCount = 0;
+      return this;
+    }
+
+    /**
+     * <code>optional uint32 round_count = 2;</code>
+     * @return the roundCount
+     */
+    public int getRoundCount() {
+      return roundCount;
+    }
+
+    /**
+     * <code>optional uint32 round_count = 2;</code>
+     * @param value the roundCount to set
+     * @return this
+     */
+    public ChallengeInfo setRoundCount(final int value) {
+      bitField0_ |= 0x00000002;
+      roundCount = value;
+      return this;
+    }
+
+    /**
      * <code>optional .ChallengeStatus status = 6;</code>
      * @return whether the status field is set
      */
     public boolean hasStatus() {
-      return (bitField0_ & 0x00000002) != 0;
+      return (bitField0_ & 0x00000004) != 0;
     }
 
     /**
@@ -93,7 +140,7 @@ public final class ChallengeInfoOuterClass {
      * @return this
      */
     public ChallengeInfo clearStatus() {
-      bitField0_ &= ~0x00000002;
+      bitField0_ &= ~0x00000004;
       status = 0;
       return this;
     }
@@ -126,7 +173,7 @@ public final class ChallengeInfoOuterClass {
      * @return this
      */
     public ChallengeInfo setStatusValue(final int value) {
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       status = value;
       return this;
     }
@@ -137,7 +184,7 @@ public final class ChallengeInfoOuterClass {
      * @return this
      */
     public ChallengeInfo setStatus(final ChallengeStatusOuterClass.ChallengeStatus value) {
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000004;
       status = value.getNumber();
       return this;
     }
@@ -147,7 +194,7 @@ public final class ChallengeInfoOuterClass {
      * @return whether the extraLineupType field is set
      */
     public boolean hasExtraLineupType() {
-      return (bitField0_ & 0x00000004) != 0;
+      return (bitField0_ & 0x00000008) != 0;
     }
 
     /**
@@ -155,7 +202,7 @@ public final class ChallengeInfoOuterClass {
      * @return this
      */
     public ChallengeInfo clearExtraLineupType() {
-      bitField0_ &= ~0x00000004;
+      bitField0_ &= ~0x00000008;
       extraLineupType = 0;
       return this;
     }
@@ -188,7 +235,7 @@ public final class ChallengeInfoOuterClass {
      * @return this
      */
     public ChallengeInfo setExtraLineupTypeValue(final int value) {
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       extraLineupType = value;
       return this;
     }
@@ -199,8 +246,65 @@ public final class ChallengeInfoOuterClass {
      * @return this
      */
     public ChallengeInfo setExtraLineupType(final ExtraLineupTypeOuterClass.ExtraLineupType value) {
-      bitField0_ |= 0x00000004;
+      bitField0_ |= 0x00000008;
       extraLineupType = value.getNumber();
+      return this;
+    }
+
+    /**
+     * <code>optional .ChallengeStoryInfo story_info = 13;</code>
+     * @return whether the storyInfo field is set
+     */
+    public boolean hasStoryInfo() {
+      return (bitField0_ & 0x00000010) != 0;
+    }
+
+    /**
+     * <code>optional .ChallengeStoryInfo story_info = 13;</code>
+     * @return this
+     */
+    public ChallengeInfo clearStoryInfo() {
+      bitField0_ &= ~0x00000010;
+      storyInfo.clear();
+      return this;
+    }
+
+    /**
+     * <code>optional .ChallengeStoryInfo story_info = 13;</code>
+     *
+     * This method returns the internal storage object without modifying any has state.
+     * The returned object should not be modified and be treated as read-only.
+     *
+     * Use {@link #getMutableStoryInfo()} if you want to modify it.
+     *
+     * @return internal storage object for reading
+     */
+    public ChallengeStoryInfoOuterClass.ChallengeStoryInfo getStoryInfo() {
+      return storyInfo;
+    }
+
+    /**
+     * <code>optional .ChallengeStoryInfo story_info = 13;</code>
+     *
+     * This method returns the internal storage object and sets the corresponding
+     * has state. The returned object will become part of this message and its
+     * contents may be modified as long as the has state is not cleared.
+     *
+     * @return internal storage object for modifications
+     */
+    public ChallengeStoryInfoOuterClass.ChallengeStoryInfo getMutableStoryInfo() {
+      bitField0_ |= 0x00000010;
+      return storyInfo;
+    }
+
+    /**
+     * <code>optional .ChallengeStoryInfo story_info = 13;</code>
+     * @param value the storyInfo to set
+     * @return this
+     */
+    public ChallengeInfo setStoryInfo(final ChallengeStoryInfoOuterClass.ChallengeStoryInfo value) {
+      bitField0_ |= 0x00000010;
+      storyInfo.copyFrom(value);
       return this;
     }
 
@@ -210,8 +314,10 @@ public final class ChallengeInfoOuterClass {
       if ((bitField0_ | other.bitField0_) != 0) {
         bitField0_ = other.bitField0_;
         challengeId = other.challengeId;
+        roundCount = other.roundCount;
         status = other.status;
         extraLineupType = other.extraLineupType;
+        storyInfo.copyFrom(other.storyInfo);
       }
       return this;
     }
@@ -225,11 +331,17 @@ public final class ChallengeInfoOuterClass {
       if (other.hasChallengeId()) {
         setChallengeId(other.challengeId);
       }
+      if (other.hasRoundCount()) {
+        setRoundCount(other.roundCount);
+      }
       if (other.hasStatus()) {
         setStatusValue(other.status);
       }
       if (other.hasExtraLineupType()) {
         setExtraLineupTypeValue(other.extraLineupType);
+      }
+      if (other.hasStoryInfo()) {
+        getMutableStoryInfo().mergeFrom(other.storyInfo);
       }
       return this;
     }
@@ -242,8 +354,10 @@ public final class ChallengeInfoOuterClass {
       cachedSize = -1;
       bitField0_ = 0;
       challengeId = 0;
+      roundCount = 0;
       status = 0;
       extraLineupType = 0;
+      storyInfo.clear();
       return this;
     }
 
@@ -254,6 +368,7 @@ public final class ChallengeInfoOuterClass {
       }
       cachedSize = -1;
       bitField0_ = 0;
+      storyInfo.clearQuick();
       return this;
     }
 
@@ -268,8 +383,10 @@ public final class ChallengeInfoOuterClass {
       ChallengeInfo other = (ChallengeInfo) o;
       return bitField0_ == other.bitField0_
         && (!hasChallengeId() || challengeId == other.challengeId)
+        && (!hasRoundCount() || roundCount == other.roundCount)
         && (!hasStatus() || status == other.status)
-        && (!hasExtraLineupType() || extraLineupType == other.extraLineupType);
+        && (!hasExtraLineupType() || extraLineupType == other.extraLineupType)
+        && (!hasStoryInfo() || storyInfo.equals(other.storyInfo));
     }
 
     @Override
@@ -279,12 +396,20 @@ public final class ChallengeInfoOuterClass {
         output.writeUInt32NoTag(challengeId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
+        output.writeRawByte((byte) 16);
+        output.writeUInt32NoTag(roundCount);
+      }
+      if ((bitField0_ & 0x00000004) != 0) {
         output.writeRawByte((byte) 48);
         output.writeEnumNoTag(status);
       }
-      if ((bitField0_ & 0x00000004) != 0) {
+      if ((bitField0_ & 0x00000008) != 0) {
         output.writeRawByte((byte) 120);
         output.writeEnumNoTag(extraLineupType);
+      }
+      if ((bitField0_ & 0x00000010) != 0) {
+        output.writeRawByte((byte) 106);
+        output.writeMessageNoTag(storyInfo);
       }
     }
 
@@ -295,10 +420,16 @@ public final class ChallengeInfoOuterClass {
         size += 1 + ProtoSink.computeUInt32SizeNoTag(challengeId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        size += 1 + ProtoSink.computeEnumSizeNoTag(status);
+        size += 1 + ProtoSink.computeUInt32SizeNoTag(roundCount);
       }
       if ((bitField0_ & 0x00000004) != 0) {
+        size += 1 + ProtoSink.computeEnumSizeNoTag(status);
+      }
+      if ((bitField0_ & 0x00000008) != 0) {
         size += 1 + ProtoSink.computeEnumSizeNoTag(extraLineupType);
+      }
+      if ((bitField0_ & 0x00000010) != 0) {
+        size += 1 + ProtoSink.computeMessageSizeNoTag(storyInfo);
       }
       return size;
     }
@@ -315,6 +446,15 @@ public final class ChallengeInfoOuterClass {
             challengeId = input.readUInt32();
             bitField0_ |= 0x00000001;
             tag = input.readTag();
+            if (tag != 16) {
+              break;
+            }
+          }
+          case 16: {
+            // roundCount
+            roundCount = input.readUInt32();
+            bitField0_ |= 0x00000002;
+            tag = input.readTag();
             if (tag != 48) {
               break;
             }
@@ -324,7 +464,7 @@ public final class ChallengeInfoOuterClass {
             final int value = input.readInt32();
             if (ChallengeStatusOuterClass.ChallengeStatus.forNumber(value) != null) {
               status = value;
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000004;
             }
             tag = input.readTag();
             if (tag != 120) {
@@ -336,8 +476,17 @@ public final class ChallengeInfoOuterClass {
             final int value = input.readInt32();
             if (ExtraLineupTypeOuterClass.ExtraLineupType.forNumber(value) != null) {
               extraLineupType = value;
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
             }
+            tag = input.readTag();
+            if (tag != 106) {
+              break;
+            }
+          }
+          case 106: {
+            // storyInfo
+            input.readMessage(storyInfo);
+            bitField0_ |= 0x00000010;
             tag = input.readTag();
             if (tag != 0) {
               break;
@@ -364,10 +513,16 @@ public final class ChallengeInfoOuterClass {
         output.writeUInt32(FieldNames.challengeId, challengeId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        output.writeEnum(FieldNames.status, status, ChallengeStatusOuterClass.ChallengeStatus.converter());
+        output.writeUInt32(FieldNames.roundCount, roundCount);
       }
       if ((bitField0_ & 0x00000004) != 0) {
+        output.writeEnum(FieldNames.status, status, ChallengeStatusOuterClass.ChallengeStatus.converter());
+      }
+      if ((bitField0_ & 0x00000008) != 0) {
         output.writeEnum(FieldNames.extraLineupType, extraLineupType, ExtraLineupTypeOuterClass.ExtraLineupType.converter());
+      }
+      if ((bitField0_ & 0x00000010) != 0) {
+        output.writeMessage(FieldNames.storyInfo, storyInfo);
       }
       output.endObject();
     }
@@ -391,13 +546,25 @@ public final class ChallengeInfoOuterClass {
             }
             break;
           }
+          case -171935711:
+          case -244677858: {
+            if (input.isAtField(FieldNames.roundCount)) {
+              if (!input.trySkipNullValue()) {
+                roundCount = input.readUInt32();
+                bitField0_ |= 0x00000002;
+              }
+            } else {
+              input.skipUnknownField();
+            }
+            break;
+          }
           case -892481550: {
             if (input.isAtField(FieldNames.status)) {
               if (!input.trySkipNullValue()) {
                 final ChallengeStatusOuterClass.ChallengeStatus value = input.readEnum(ChallengeStatusOuterClass.ChallengeStatus.converter());
                 if (value != null) {
                   status = value.getNumber();
-                  bitField0_ |= 0x00000002;
+                  bitField0_ |= 0x00000004;
                 } else {
                   input.skipUnknownEnumValue();
                 }
@@ -414,10 +581,22 @@ public final class ChallengeInfoOuterClass {
                 final ExtraLineupTypeOuterClass.ExtraLineupType value = input.readEnum(ExtraLineupTypeOuterClass.ExtraLineupType.converter());
                 if (value != null) {
                   extraLineupType = value.getNumber();
-                  bitField0_ |= 0x00000004;
+                  bitField0_ |= 0x00000008;
                 } else {
                   input.skipUnknownEnumValue();
                 }
+              }
+            } else {
+              input.skipUnknownField();
+            }
+            break;
+          }
+          case 1710116675:
+          case 1494185400: {
+            if (input.isAtField(FieldNames.storyInfo)) {
+              if (!input.trySkipNullValue()) {
+                input.readMessage(storyInfo);
+                bitField0_ |= 0x00000010;
               }
             } else {
               input.skipUnknownField();
@@ -478,9 +657,13 @@ public final class ChallengeInfoOuterClass {
     static class FieldNames {
       static final FieldName challengeId = FieldName.forField("challengeId", "challenge_id");
 
+      static final FieldName roundCount = FieldName.forField("roundCount", "round_count");
+
       static final FieldName status = FieldName.forField("status");
 
       static final FieldName extraLineupType = FieldName.forField("extraLineupType", "extra_lineup_type");
+
+      static final FieldName storyInfo = FieldName.forField("storyInfo", "story_info");
     }
   }
 }
