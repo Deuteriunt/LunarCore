@@ -17,7 +17,7 @@ import emu.lunarcore.game.scene.entity.EntityProp;
 import emu.lunarcore.util.Position;
 import emu.lunarcore.util.Utils;
 
-@Command(label = "spawn", permission = "player.spawn", requireTarget = true, desc = "/spawn [怪物id] [场景id] x[数量] lv[等级] r[半径] 生成实体.")
+@Command(label = "spawn", permission = "player.spawn", requireTarget = true, desc = "/spawn [怪物id] [场景id] x[数量] lv[等级] r[半径]  在玩家附近生成怪物或道具.")
 public class SpawnCommand implements CommandHandler {
 
     @Override
@@ -37,7 +37,7 @@ public class SpawnCommand implements CommandHandler {
         
         // Enforce scene max entity limit
         if (target.getScene().getEntities().size() + amount >= LunarCore.getConfig().getServerOptions().getSceneMaxEntites()) {
-            args.sendMessage("错误：场景中的实体数量已达到上限");
+            args.sendMessage("错误：该场景中的实体数量已达到上限");
             return;
         }
         

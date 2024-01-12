@@ -11,7 +11,7 @@ import emu.lunarcore.data.excel.ItemExcel;
 import emu.lunarcore.game.inventory.GameItem;
 import emu.lunarcore.game.mail.Mail;
 
-@Command(label = "mail", aliases = {"m"}, permission = "player.mail", requireTarget = true, desc = "/mail [邮件内容]. 发送邮件给目标玩家")
+@Command(label = "mail", aliases = {"m"}, permission = "player.mail", requireTarget = true, desc = "/mail [邮件内容]. 发送邮件给目标玩家.")
 public class MailCommand implements CommandHandler {
 
     @Override

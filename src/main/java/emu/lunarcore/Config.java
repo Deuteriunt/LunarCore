@@ -1,5 +1,6 @@
 package emu.lunarcore;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class Config {
     public GameServerConfig gameServer = new GameServerConfig(23301);
     
     public ServerOptions serverOptions = new ServerOptions();
+    public ServerTime serverTime = new ServerTime();
     public ServerRates serverRates = new ServerRates();
     public LogOptions logOptions = new LogOptions();
     public DownloadData downloadData = new DownloadData();
@@ -40,7 +42,7 @@ public class Config {
     public static class InternalMongoInfo {
         public String address = "localhost";
         public int port = 27017;
-        public String filePath = "database.mv";
+        public String filePath = "Amireux.mv";
     }
 
     @Getter
@@ -107,6 +109,12 @@ public class Config {
         }
     }
     
+    @Getter 
+    public static class ServerTime {
+        public boolean spoofTime = false;
+        public Date spoofDate = new Date(1705276800000L); // January 15, 2024 12:00:00 AM (GMT)
+    }
+    
     @Getter
     public static class ServerOptions {
         public boolean autoCreateAccount = true;
@@ -147,9 +155,9 @@ public class Config {
         public String name = "Amireux";
         public String signature = "输入 /help 以获取命令列表\n欢迎来到Amireux 星穹铁道1.6服务端，如果你是买来的你被骗了，请举报+退款，本服务端免费，倒卖者死全家.\n祝您游戏愉快";
         public int level = 114514;
-        public int headIcon = 201302;
+        public int headIcon = 201303;
         public int chatBubbleId = 0;
-        public int displayAvatarId = 1302;
+        public int displayAvatarId = 1303;
         public int displayAvatarLevel = 114514;
     }
     
@@ -161,9 +169,9 @@ public class Config {
         public List<ItemParam> attachments;
         
         public WelcomeMail() {
-            this.title = "欢迎来到Amireux星穹铁道1.6服务器.";
+            this.title = "欢迎来到Amireux 星穹铁道1.6服务端";
             this.sender = "Amireux";
-            this.content = "欢迎来到Amireux 星穹铁道1.6服务端\n如果你是买来的你被骗了，请举报+退款\n本服务端免费,倒卖者死全家,祝您游戏愉快！";
+            this.content = "欢迎来到Amireux 星穹铁道1.6服务端，如果你是买来的你被骗了，请举报+退款，本服务端免费，倒卖者死全家.\n祝您游戏愉快";
             this.attachments = List.of(
                 new ItemParam(2, 1000000),
                 new ItemParam(101, 100),
@@ -184,10 +192,10 @@ public class Config {
     
     @Getter
     public static class DownloadData {
-        public String assetBundleUrl = "https://autopatchos.starrails.com/asb/V1.6Live/output_6229948_0844d00ce5";
-        public String exResourceUrl = "https://autopatchos.starrails.com/design_data/V1.6Live/output_6229971_b450b4ac62";
-        public String luaUrl = "https://autopatchos.starrails.com/lua/V1.6Live/output_6229948_0844d00ce5";
-        public String ifixUrl = "https://autopatchos.starrails.com/ifix/V1.6Live/output_6230171_e139aa52e7";
+        public String assetBundleUrl = null;
+        public String exResourceUrl = null;
+        public String luaUrl = null;
+        public String ifixUrl = null;
     }
 
 }

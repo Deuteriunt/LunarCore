@@ -43,6 +43,8 @@ public class LunarCore {
 
     private static LineReaderImpl reader;
     @Getter private static boolean usingDumbTerminal;
+    
+    private static long timeOffset = 0;
 
     static {
         // Setup console reader
@@ -58,11 +60,12 @@ public class LunarCore {
 
         // Load config
         LunarCore.loadConfig();
+        LunarCore.updateServerTimeOffset();
     }
 
     public static void main(String[] args) {
         // Start Server
-        LunarCore.getLogger().info("正在打开Amireux编译的Lunar Core，倒卖者死全家！" + getJarVersion());
+        LunarCore.getLogger().info("正在打开Amireux编译的Lunar Core，倒卖者死全家！ " + getJarVersion());
         LunarCore.getLogger().info("Git hash: " + getGitHash());
         LunarCore.getLogger().info("游戏版本: " + GameConstants.VERSION);
         boolean generateHandbook = true;
@@ -117,7 +120,7 @@ public class LunarCore {
             // Start Database(s)
             LunarCore.initDatabases();
         } catch (Exception exception) {
-            LunarCore.getLogger().error("\"无法启动数据库.", exception);
+            LunarCore.getLogger().error("无法启动数据库.", exception);
         }
 
         try {
@@ -195,7 +198,12 @@ public class LunarCore {
 
     public static void saveConfig() {
         try (FileWriter file = new FileWriter(configFile)) {
-            Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("dd-MM-yyyy hh:mm:ss")
+                    .setPrettyPrinting()
+                    .serializeNulls()
+                    .create();
+            
             file.write(gson.toJson(config));
         } catch (Exception e) {
             getLogger().error("配置保存错误");
@@ -239,6 +247,29 @@ public class LunarCore {
             return "";
         } else {
             return builder.toString();
+        }
+    }
+    
+    /**
+     * Returns the current server's time in milliseconds to send to the client. Can be used to spoof server time.
+     */
+    public static long currentServerTime() {
+        return convertToServerTime(System.currentTimeMillis());
+    }
+    
+    /**
+     * Converts a timestamp (in milliseconds) to the server time
+     */
+    public static long convertToServerTime(long time) {
+        return time + timeOffset;
+    }
+    
+    private static void updateServerTimeOffset() {
+        var timeOptions = LunarCore.getConfig().getServerTime();
+        if (timeOptions.isSpoofTime() && timeOptions.getSpoofDate() != null) {
+            timeOffset = timeOptions.getSpoofDate().getTime() - System.currentTimeMillis();
+        } else {
+            timeOffset = 0;
         }
     }
 

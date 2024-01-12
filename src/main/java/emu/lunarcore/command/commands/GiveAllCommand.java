@@ -55,7 +55,7 @@ public class GiveAllCommand implements CommandHandler {
                 // Make sure we dont go over the inventory limit
                 var tab = args.getTarget().getInventory().getTabByItemType(ItemMainType.Equipment);
                 if (tab.getSize() >= tab.getMaxCapacity()) {
-                    args.sendMessage(target.getName() + " has too many of this item type");
+                    args.sendMessage(target.getName() + " 此物品类型太多");
                     return;
                 }
                 
@@ -80,7 +80,7 @@ public class GiveAllCommand implements CommandHandler {
                 // Make sure we dont go over the inventory limit
                 var tab = args.getTarget().getInventory().getTabByItemType(ItemMainType.Relic);
                 if (tab.getSize() >= tab.getMaxCapacity()) {
-                    args.sendMessage(target.getName() + " has too many of this item type");
+                    args.sendMessage(target.getName() + " 此物品类型太多");
                     return;
                 }
                 
@@ -164,7 +164,7 @@ public class GiveAllCommand implements CommandHandler {
                 }
                 
                 // Send message
-                args.sendMessage("Added all icons/chat bubbles/phone themes to " + target.getName());
+                args.sendMessage("将所有图标/聊天气泡/手机主题添加到 " + target.getName());
             }
             case "consumables", "food" -> {
                 // Get consumables
@@ -178,7 +178,7 @@ public class GiveAllCommand implements CommandHandler {
                 target.getInventory().addItems(items, true);
 
                 // Send message
-                args.sendMessage("Added all consumables to " + target.getName());
+                args.sendMessage("将所有消耗品添加到 " + target.getName());
             }
         }
     }
