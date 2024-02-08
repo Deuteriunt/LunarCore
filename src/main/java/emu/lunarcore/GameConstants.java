@@ -6,7 +6,7 @@ import java.time.ZoneOffset;
 import emu.lunarcore.util.Position;
 
 public class GameConstants {
-    public static String VERSION = "1.6.0";
+    public static String VERSION = "2.0.0";
     
     public static final ZoneOffset CURRENT_ZONEOFFSET = ZoneOffset.systemDefault().getRules().getOffset(Instant.now());
     public static final int CURRENT_TIMEZONE = CURRENT_ZONEOFFSET.getTotalSeconds() / 3600;
@@ -20,7 +20,7 @@ public class GameConstants {
     public static final int MAX_STAMINA = 240;
     public static final int MAX_STAMINA_RESERVE = 2400;
     public static final int MAX_AVATARS_IN_TEAM = 4;
-    public static final int DEFAULT_TEAMS = 6;
+    public static final int DEFAULT_TEAMS = 9;
     public static final int MAX_MP = 5; // Client doesnt like more than 5
     public static final int FARM_ELEMENT_STAMINA_COST = 30;
 
@@ -32,6 +32,7 @@ public class GameConstants {
     public static final int MATERIAL_HCOIN_ID = 1; // Material id for jades. DO NOT CHANGE
     public static final int MATERIAL_COIN_ID = 2; // Material id for credits. DO NOT CHANGE
     public static final int TRAILBLAZER_EXP_ID = 22;
+    public static final int RELIC_REMAINS_ID = 235;
     
     public static final int INVENTORY_MAX_EQUIPMENT = 1500;
     public static final int INVENTORY_MAX_RELIC = 1500;
@@ -57,6 +58,9 @@ public class GameConstants {
     public static final boolean ENABLE_ROGUE = false;
     public static final int ROGUE_ENTRANCE = 801120102;
     public static final int ROGUE_TALENT_POINT_ITEM_ID = 32;
+    
+    // Activity
+    public static final int[] ENABLE_ACTIVITY_TYPES = { 18, 34 };
     
     // Custom
     public static final int SERVER_CONSOLE_UID = 99;

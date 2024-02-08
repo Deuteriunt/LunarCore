@@ -20,6 +20,11 @@ public final class TakeMailAttachmentCsReqOuterClass {
     private static final long serialVersionUID = 0L;
 
     /**
+     * <code>optional uint32 optional_reward_id = 9;</code>
+     */
+    private int optionalRewardId;
+
+    /**
      * <code>repeated uint32 mail_id_list = 12;</code>
      */
     private final RepeatedInt mailIdList = RepeatedInt.newEmptyInstance();
@@ -35,11 +40,48 @@ public final class TakeMailAttachmentCsReqOuterClass {
     }
 
     /**
+     * <code>optional uint32 optional_reward_id = 9;</code>
+     * @return whether the optionalRewardId field is set
+     */
+    public boolean hasOptionalRewardId() {
+      return (bitField0_ & 0x00000001) != 0;
+    }
+
+    /**
+     * <code>optional uint32 optional_reward_id = 9;</code>
+     * @return this
+     */
+    public TakeMailAttachmentCsReq clearOptionalRewardId() {
+      bitField0_ &= ~0x00000001;
+      optionalRewardId = 0;
+      return this;
+    }
+
+    /**
+     * <code>optional uint32 optional_reward_id = 9;</code>
+     * @return the optionalRewardId
+     */
+    public int getOptionalRewardId() {
+      return optionalRewardId;
+    }
+
+    /**
+     * <code>optional uint32 optional_reward_id = 9;</code>
+     * @param value the optionalRewardId to set
+     * @return this
+     */
+    public TakeMailAttachmentCsReq setOptionalRewardId(final int value) {
+      bitField0_ |= 0x00000001;
+      optionalRewardId = value;
+      return this;
+    }
+
+    /**
      * <code>repeated uint32 mail_id_list = 12;</code>
      * @return whether the mailIdList field is set
      */
     public boolean hasMailIdList() {
-      return (bitField0_ & 0x00000001) != 0;
+      return (bitField0_ & 0x00000002) != 0;
     }
 
     /**
@@ -47,7 +89,7 @@ public final class TakeMailAttachmentCsReqOuterClass {
      * @return this
      */
     public TakeMailAttachmentCsReq clearMailIdList() {
-      bitField0_ &= ~0x00000001;
+      bitField0_ &= ~0x00000002;
       mailIdList.clear();
       return this;
     }
@@ -76,7 +118,7 @@ public final class TakeMailAttachmentCsReqOuterClass {
      * @return internal storage object for modifications
      */
     public RepeatedInt getMutableMailIdList() {
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       return mailIdList;
     }
 
@@ -86,7 +128,7 @@ public final class TakeMailAttachmentCsReqOuterClass {
      * @return this
      */
     public TakeMailAttachmentCsReq addMailIdList(final int value) {
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       mailIdList.add(value);
       return this;
     }
@@ -97,7 +139,7 @@ public final class TakeMailAttachmentCsReqOuterClass {
      * @return this
      */
     public TakeMailAttachmentCsReq addAllMailIdList(final int... values) {
-      bitField0_ |= 0x00000001;
+      bitField0_ |= 0x00000002;
       mailIdList.addAll(values);
       return this;
     }
@@ -107,6 +149,7 @@ public final class TakeMailAttachmentCsReqOuterClass {
       cachedSize = other.cachedSize;
       if ((bitField0_ | other.bitField0_) != 0) {
         bitField0_ = other.bitField0_;
+        optionalRewardId = other.optionalRewardId;
         mailIdList.copyFrom(other.mailIdList);
       }
       return this;
@@ -118,6 +161,9 @@ public final class TakeMailAttachmentCsReqOuterClass {
         return this;
       }
       cachedSize = -1;
+      if (other.hasOptionalRewardId()) {
+        setOptionalRewardId(other.optionalRewardId);
+      }
       if (other.hasMailIdList()) {
         getMutableMailIdList().addAll(other.mailIdList);
       }
@@ -131,6 +177,7 @@ public final class TakeMailAttachmentCsReqOuterClass {
       }
       cachedSize = -1;
       bitField0_ = 0;
+      optionalRewardId = 0;
       mailIdList.clear();
       return this;
     }
@@ -156,12 +203,17 @@ public final class TakeMailAttachmentCsReqOuterClass {
       }
       TakeMailAttachmentCsReq other = (TakeMailAttachmentCsReq) o;
       return bitField0_ == other.bitField0_
+        && (!hasOptionalRewardId() || optionalRewardId == other.optionalRewardId)
         && (!hasMailIdList() || mailIdList.equals(other.mailIdList));
     }
 
     @Override
     public void writeTo(final ProtoSink output) throws IOException {
       if ((bitField0_ & 0x00000001) != 0) {
+        output.writeRawByte((byte) 72);
+        output.writeUInt32NoTag(optionalRewardId);
+      }
+      if ((bitField0_ & 0x00000002) != 0) {
         for (int i = 0; i < mailIdList.length(); i++) {
           output.writeRawByte((byte) 96);
           output.writeUInt32NoTag(mailIdList.array()[i]);
@@ -173,6 +225,9 @@ public final class TakeMailAttachmentCsReqOuterClass {
     protected int computeSerializedSize() {
       int size = 0;
       if ((bitField0_ & 0x00000001) != 0) {
+        size += 1 + ProtoSink.computeUInt32SizeNoTag(optionalRewardId);
+      }
+      if ((bitField0_ & 0x00000002) != 0) {
         size += (1 * mailIdList.length()) + ProtoSink.computeRepeatedUInt32SizeNoTag(mailIdList);
       }
       return size;
@@ -185,10 +240,19 @@ public final class TakeMailAttachmentCsReqOuterClass {
       int tag = input.readTag();
       while (true) {
         switch (tag) {
+          case 72: {
+            // optionalRewardId
+            optionalRewardId = input.readUInt32();
+            bitField0_ |= 0x00000001;
+            tag = input.readTag();
+            if (tag != 98) {
+              break;
+            }
+          }
           case 98: {
             // mailIdList [packed=true]
             input.readPackedUInt32(mailIdList, tag);
-            bitField0_ |= 0x00000001;
+            bitField0_ |= 0x00000002;
             tag = input.readTag();
             if (tag != 0) {
               break;
@@ -207,7 +271,7 @@ public final class TakeMailAttachmentCsReqOuterClass {
           case 96: {
             // mailIdList [packed=false]
             tag = input.readRepeatedUInt32(mailIdList, tag);
-            bitField0_ |= 0x00000001;
+            bitField0_ |= 0x00000002;
             break;
           }
         }
@@ -218,6 +282,9 @@ public final class TakeMailAttachmentCsReqOuterClass {
     public void writeTo(final JsonSink output) throws IOException {
       output.beginObject();
       if ((bitField0_ & 0x00000001) != 0) {
+        output.writeUInt32(FieldNames.optionalRewardId, optionalRewardId);
+      }
+      if ((bitField0_ & 0x00000002) != 0) {
         output.writeRepeatedUInt32(FieldNames.mailIdList, mailIdList);
       }
       output.endObject();
@@ -230,12 +297,24 @@ public final class TakeMailAttachmentCsReqOuterClass {
       }
       while (!input.isAtEnd()) {
         switch (input.readFieldHash()) {
+          case -1391749078:
+          case -1451381236: {
+            if (input.isAtField(FieldNames.optionalRewardId)) {
+              if (!input.trySkipNullValue()) {
+                optionalRewardId = input.readUInt32();
+                bitField0_ |= 0x00000001;
+              }
+            } else {
+              input.skipUnknownField();
+            }
+            break;
+          }
           case -1612269328:
           case 1599691450: {
             if (input.isAtField(FieldNames.mailIdList)) {
               if (!input.trySkipNullValue()) {
                 input.readRepeatedUInt32(mailIdList);
-                bitField0_ |= 0x00000001;
+                bitField0_ |= 0x00000002;
               }
             } else {
               input.skipUnknownField();
@@ -295,6 +374,8 @@ public final class TakeMailAttachmentCsReqOuterClass {
      * Contains name constants used for serializing JSON
      */
     static class FieldNames {
+      static final FieldName optionalRewardId = FieldName.forField("optionalRewardId", "optional_reward_id");
+
       static final FieldName mailIdList = FieldName.forField("mailIdList", "mail_id_list");
     }
   }

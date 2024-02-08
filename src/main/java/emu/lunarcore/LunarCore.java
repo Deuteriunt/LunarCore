@@ -206,7 +206,7 @@ public class LunarCore {
             
             file.write(gson.toJson(config));
         } catch (Exception e) {
-            getLogger().error("配置保存错误");
+            getLogger().error("Config save error");
         }
     }
 

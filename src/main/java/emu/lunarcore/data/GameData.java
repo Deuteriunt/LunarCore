@@ -46,7 +46,6 @@ public class GameData {
     @Getter private static Int2ObjectMap<ChallengeGroupExcel> challengeGroupExcelMap = new Int2ObjectOpenHashMap<>();
     @Getter private static Int2ObjectMap<ChallengeExcel> challengeExcelMap = new Int2ObjectOpenHashMap<>();
     @Getter private static Int2ObjectMap<ChallengeTargetExcel> challengeTargetExcelMap = new Int2ObjectOpenHashMap<>();
-    private static Int2ObjectMap<ChallengeRewardExcel> challengeRewardExcelMap = new Int2ObjectOpenHashMap<>();
     
     @Getter private static Int2ObjectMap<RogueManagerExcel> rogueManagerExcelMap = new Int2ObjectOpenHashMap<>();
     @Getter private static Int2ObjectMap<RogueTalentExcel> rogueTalentExcelMap = new Int2ObjectOpenHashMap<>();
@@ -55,6 +54,14 @@ public class GameData {
     @Getter private static Int2ObjectMap<RogueRoomExcel> rogueRoomExcelMap = new Int2ObjectOpenHashMap<>();
     @Getter private static Int2ObjectMap<RogueMapExcel> rogueMapExcelMap = new Int2ObjectOpenHashMap<>();
     @Getter private static Int2ObjectMap<RogueMonsterExcel> rogueMonsterExcelMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static Int2ObjectMap<DialogueEventExcel> rogueDialogueEventList = new Int2ObjectOpenHashMap<>();
+    @Getter private static Int2ObjectMap<RogueBuffExcel> rogueBuffTagExcelMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static Int2ObjectMap<RogueBuffGroupExcel> rogueBuffGroupExcelMap = new Int2ObjectOpenHashMap<>();
+    
+    @Getter private static Int2ObjectMap<RogueDLCAreaExcel> rogueDLCAreaExcelMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static Int2ObjectMap<RogueNousMainStoryExcel> rogueNousMainStoryExcelMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static Int2ObjectMap<RogueNousSubStoryExcel> rogueNousSubStoryExcelMap = new Int2ObjectOpenHashMap<>();
+    @Getter private static Int2ObjectMap<RogueNousDiceBranchExcel> rogueNousDiceBranchExcelMap = new Int2ObjectOpenHashMap<>();
     private static Int2ObjectMap<RogueBuffExcel> rogueBuffExcelMap = new Int2ObjectOpenHashMap<>();
     
     private static Int2ObjectMap<AvatarPromotionExcel> avatarPromotionExcelMap = new Int2ObjectOpenHashMap<>();
@@ -96,14 +103,7 @@ public class GameData {
     }
 
     public static List<Integer> getAllRelicIds() {
-        List<Integer> allIds = new ArrayList<>();
-
-        for (Int2ObjectMap.Entry<RelicExcel> entry : relicExcelMap.int2ObjectEntrySet()) {
-            RelicExcel relicExcel = entry.getValue();
-            allIds.add(relicExcel.getId());
-        }
-
-        return allIds;
+        return relicExcelMap.values().stream().map(RelicExcel::getId).toList();
     }
 
     public static int getRelicSetFromId(int relicId) {
@@ -112,6 +112,7 @@ public class GameData {
         if (relicExcel == null) {
             return 0;
         }
+        
         return relicExcel.getSetId();
     }
 
@@ -217,10 +218,6 @@ public class GameData {
     
     public static MonsterDropExcel getMonsterDropExcel(int monsterNpcId, int worldLevel) {
         return monsterDropExcelMap.get((monsterNpcId << 4) + worldLevel);
-    }
-    
-    public static ChallengeRewardExcel getChallengeRewardExcel(int groupId, int starCount) {
-        return challengeRewardExcelMap.get((groupId << 16) + starCount);
     }
     
     public static RogueMapExcel getRogueMapExcel(int rogueMapId, int siteId) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import emu.lunarcore.GameConstants;
+import emu.lunarcore.data.custom.ActivityScheduleData;
 import emu.lunarcore.data.excel.*;
 import emu.lunarcore.util.Utils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
@@ -12,6 +13,9 @@ import lombok.Getter;
 
 // Game data that is parsed by the server goes here
 public class GameDepot {
+    // Activity
+    @Getter private static List<ActivityScheduleData> activityScheduleExcels = new ArrayList<>();
+    
     // Exp
     @Getter private static List<AvatarExpItemExcel> avatarExpExcels = new ArrayList<>();
     @Getter private static List<EquipmentExpItemExcel> equipmentExpExcels = new ArrayList<>();
@@ -20,12 +24,16 @@ public class GameDepot {
     // Relics
     private static Int2ObjectMap<List<RelicMainAffixExcel>> relicMainAffixDepot = new Int2ObjectOpenHashMap<>();
     private static Int2ObjectMap<List<RelicSubAffixExcel>> relicSubAffixDepot = new Int2ObjectOpenHashMap<>();
+    
+    // Challenges
+    @Getter private static Int2ObjectMap<List<ChallengeRewardExcel>> challengeRewardLines = new Int2ObjectOpenHashMap<>();
 
     // Rogue
     @Getter private static Int2ObjectMap<int[]> rogueMapGen = new Int2ObjectOpenHashMap<>();
     @Getter private static Int2ObjectMap<RogueBuffExcel> rogueAeonBuffs = new Int2ObjectOpenHashMap<>();
     @Getter private static Int2ObjectMap<List<RogueBuffExcel>> rogueAeonEnhanceBuffs = new Int2ObjectOpenHashMap<>();
     @Getter private static List<RogueBuffExcel> rogueRandomBuffList = new ArrayList<>();
+    @Getter private static List<RogueBonusExcel> rogueRandomCommonBonusList = new ArrayList<>();
     @Getter private static List<RogueMiracleExcel> rogueRandomMiracleList = new ArrayList<>();
     @Getter private static List<RogueNPCExcel> rogueRandomNpcList = new ArrayList<>();
     private static Int2ObjectMap<List<RogueMapExcel>> rogueMapDepot = new Int2ObjectOpenHashMap<>();

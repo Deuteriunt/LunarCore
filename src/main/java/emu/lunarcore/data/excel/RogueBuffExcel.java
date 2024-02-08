@@ -2,6 +2,7 @@ package emu.lunarcore.data.excel;
 
 import java.util.ArrayList;
 
+import emu.lunarcore.data.GameData;
 import emu.lunarcore.data.GameDepot;
 import emu.lunarcore.data.GameResource;
 import emu.lunarcore.data.ResourceType;
@@ -16,6 +17,7 @@ public class RogueBuffExcel extends GameResource {
     private int MazeBuffLevel;
     private int RogueBuffType;
     private int RogueBuffRarity;
+    private int RogueBuffTag;
     private int AeonID;
     private RogueBuffAeonType BattleEventBuffType = RogueBuffAeonType.Normal;
 
@@ -31,7 +33,7 @@ public class RogueBuffExcel extends GameResource {
     @Override
     public void onLoad() {
         // Add to random buff list
-        if (RogueBuffType >= 120 && RogueBuffType <= 126 && RogueBuffRarity >= 1 && RogueBuffRarity <= 3 && MazeBuffLevel == 1 && AeonID == 0) {
+        if (RogueBuffType >= 120 && RogueBuffType <= 128 && RogueBuffRarity >= 1 && RogueBuffRarity <= 3 && MazeBuffLevel == 1 && AeonID == 0) {
             GameDepot.getRogueRandomBuffList().add(this);
         }
 
@@ -41,5 +43,7 @@ public class RogueBuffExcel extends GameResource {
         } else if (BattleEventBuffType == RogueBuffAeonType.BattleEventBuffEnhance) {
             GameDepot.getRogueAeonEnhanceBuffs().computeIfAbsent(this.getAeonID(), e -> new ArrayList<>()).add(this);
         }
+        
+        GameData.getRogueBuffTagExcelMap().put(this.getRogueBuffTag(), this);
     }
 }

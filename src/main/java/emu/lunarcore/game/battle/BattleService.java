@@ -21,10 +21,7 @@ import emu.lunarcore.proto.BattleEndStatusOuterClass.BattleEndStatus;
 import emu.lunarcore.proto.BattleStatisticsOuterClass.BattleStatistics;
 import emu.lunarcore.server.game.BaseGameService;
 import emu.lunarcore.server.game.GameServer;
-import emu.lunarcore.server.packet.send.PacketReEnterLastElementStageScRsp;
-import emu.lunarcore.server.packet.send.PacketSceneCastSkillScRsp;
-import emu.lunarcore.server.packet.send.PacketStartCocoonStageScRsp;
-import emu.lunarcore.server.packet.send.PacketSyncLineupNotify;
+import emu.lunarcore.server.packet.send.*;
 import it.unimi.dsi.fastutil.ints.IntSet;
 
 public class BattleService extends BaseGameService {
@@ -58,6 +55,7 @@ public class BattleService extends BaseGameService {
             for (int entityId : hitTargets) {
                 if (player.getScene().getAvatarEntityIds().contains(entityId)) {
                     isAmbushed = true;
+                    break;
                 }
             }
             
@@ -163,6 +161,39 @@ public class BattleService extends BaseGameService {
         
         // Send packet
         player.sendPacket(new PacketSceneCastSkillScRsp(attackedGroupId));
+    }
+    
+    public void startBattle(Player player, int stageId) {
+        // Sanity check to make sure player isnt in a battle
+        if (player.isInBattle()) {
+            player.sendPacket(new PacketSceneEnterStageScRsp(player.getBattle()));
+            return;
+        }
+        
+        // Get stage
+        StageExcel stage = GameData.getStageExcelMap().get(stageId);
+        if (stage == null) {
+            player.sendPacket(new PacketSceneCastSkillScRsp());
+            return;
+        }
+        
+        // Create new battle for player
+        Battle battle = new Battle(player, player.getCurrentLineup(), stage);
+
+        // Challenge
+        if (player.getChallengeInstance() != null) {
+            player.getChallengeInstance().onBattleStart(battle);
+        }
+
+        // Rogue
+        if (player.getRogueInstance() != null) {
+            player.getRogueInstance().onBattleStart(battle);
+        }
+        
+        player.setBattle(battle);
+        
+        // Send packet
+        player.sendPacket(new PacketSceneEnterStageScRsp(battle));
     }
     
     public void startCocoon(Player player, int cocoonId, int worldLevel, int wave) {

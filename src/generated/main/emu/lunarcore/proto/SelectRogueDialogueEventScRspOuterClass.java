@@ -10,6 +10,7 @@ import us.hebi.quickbuf.MessageFactory;
 import us.hebi.quickbuf.ProtoMessage;
 import us.hebi.quickbuf.ProtoSink;
 import us.hebi.quickbuf.ProtoSource;
+import us.hebi.quickbuf.RepeatedMessage;
 
 public final class SelectRogueDialogueEventScRspOuterClass {
   /**
@@ -19,14 +20,24 @@ public final class SelectRogueDialogueEventScRspOuterClass {
     private static final long serialVersionUID = 0L;
 
     /**
-     * <code>optional uint32 retcode = 1;</code>
+     * <code>optional uint32 dialogue_event_id = 9;</code>
+     */
+    private int dialogueEventId;
+
+    /**
+     * <code>optional uint32 retcode = 15;</code>
      */
     private int retcode;
 
     /**
-     * <code>optional uint32 dialogue_event_id = 12;</code>
+     * <code>optional .RogueDialogueEvent event_data = 14;</code>
      */
-    private int dialogueEventId;
+    private final RogueDialogueEventOuterClass.RogueDialogueEvent eventData = RogueDialogueEventOuterClass.RogueDialogueEvent.newInstance();
+
+    /**
+     * <code>repeated .DialogueResult dialogue_result = 6;</code>
+     */
+    private final RepeatedMessage<DialogueResultOuterClass.DialogueResult> dialogueResult = RepeatedMessage.newEmptyInstance(DialogueResultOuterClass.DialogueResult.getFactory());
 
     private SelectRogueDialogueEventScRsp() {
     }
@@ -39,62 +50,25 @@ public final class SelectRogueDialogueEventScRspOuterClass {
     }
 
     /**
-     * <code>optional uint32 retcode = 1;</code>
-     * @return whether the retcode field is set
+     * <code>optional uint32 dialogue_event_id = 9;</code>
+     * @return whether the dialogueEventId field is set
      */
-    public boolean hasRetcode() {
+    public boolean hasDialogueEventId() {
       return (bitField0_ & 0x00000001) != 0;
     }
 
     /**
-     * <code>optional uint32 retcode = 1;</code>
-     * @return this
-     */
-    public SelectRogueDialogueEventScRsp clearRetcode() {
-      bitField0_ &= ~0x00000001;
-      retcode = 0;
-      return this;
-    }
-
-    /**
-     * <code>optional uint32 retcode = 1;</code>
-     * @return the retcode
-     */
-    public int getRetcode() {
-      return retcode;
-    }
-
-    /**
-     * <code>optional uint32 retcode = 1;</code>
-     * @param value the retcode to set
-     * @return this
-     */
-    public SelectRogueDialogueEventScRsp setRetcode(final int value) {
-      bitField0_ |= 0x00000001;
-      retcode = value;
-      return this;
-    }
-
-    /**
-     * <code>optional uint32 dialogue_event_id = 12;</code>
-     * @return whether the dialogueEventId field is set
-     */
-    public boolean hasDialogueEventId() {
-      return (bitField0_ & 0x00000002) != 0;
-    }
-
-    /**
-     * <code>optional uint32 dialogue_event_id = 12;</code>
+     * <code>optional uint32 dialogue_event_id = 9;</code>
      * @return this
      */
     public SelectRogueDialogueEventScRsp clearDialogueEventId() {
-      bitField0_ &= ~0x00000002;
+      bitField0_ &= ~0x00000001;
       dialogueEventId = 0;
       return this;
     }
 
     /**
-     * <code>optional uint32 dialogue_event_id = 12;</code>
+     * <code>optional uint32 dialogue_event_id = 9;</code>
      * @return the dialogueEventId
      */
     public int getDialogueEventId() {
@@ -102,13 +76,178 @@ public final class SelectRogueDialogueEventScRspOuterClass {
     }
 
     /**
-     * <code>optional uint32 dialogue_event_id = 12;</code>
+     * <code>optional uint32 dialogue_event_id = 9;</code>
      * @param value the dialogueEventId to set
      * @return this
      */
     public SelectRogueDialogueEventScRsp setDialogueEventId(final int value) {
-      bitField0_ |= 0x00000002;
+      bitField0_ |= 0x00000001;
       dialogueEventId = value;
+      return this;
+    }
+
+    /**
+     * <code>optional uint32 retcode = 15;</code>
+     * @return whether the retcode field is set
+     */
+    public boolean hasRetcode() {
+      return (bitField0_ & 0x00000002) != 0;
+    }
+
+    /**
+     * <code>optional uint32 retcode = 15;</code>
+     * @return this
+     */
+    public SelectRogueDialogueEventScRsp clearRetcode() {
+      bitField0_ &= ~0x00000002;
+      retcode = 0;
+      return this;
+    }
+
+    /**
+     * <code>optional uint32 retcode = 15;</code>
+     * @return the retcode
+     */
+    public int getRetcode() {
+      return retcode;
+    }
+
+    /**
+     * <code>optional uint32 retcode = 15;</code>
+     * @param value the retcode to set
+     * @return this
+     */
+    public SelectRogueDialogueEventScRsp setRetcode(final int value) {
+      bitField0_ |= 0x00000002;
+      retcode = value;
+      return this;
+    }
+
+    /**
+     * <code>optional .RogueDialogueEvent event_data = 14;</code>
+     * @return whether the eventData field is set
+     */
+    public boolean hasEventData() {
+      return (bitField0_ & 0x00000004) != 0;
+    }
+
+    /**
+     * <code>optional .RogueDialogueEvent event_data = 14;</code>
+     * @return this
+     */
+    public SelectRogueDialogueEventScRsp clearEventData() {
+      bitField0_ &= ~0x00000004;
+      eventData.clear();
+      return this;
+    }
+
+    /**
+     * <code>optional .RogueDialogueEvent event_data = 14;</code>
+     *
+     * This method returns the internal storage object without modifying any has state.
+     * The returned object should not be modified and be treated as read-only.
+     *
+     * Use {@link #getMutableEventData()} if you want to modify it.
+     *
+     * @return internal storage object for reading
+     */
+    public RogueDialogueEventOuterClass.RogueDialogueEvent getEventData() {
+      return eventData;
+    }
+
+    /**
+     * <code>optional .RogueDialogueEvent event_data = 14;</code>
+     *
+     * This method returns the internal storage object and sets the corresponding
+     * has state. The returned object will become part of this message and its
+     * contents may be modified as long as the has state is not cleared.
+     *
+     * @return internal storage object for modifications
+     */
+    public RogueDialogueEventOuterClass.RogueDialogueEvent getMutableEventData() {
+      bitField0_ |= 0x00000004;
+      return eventData;
+    }
+
+    /**
+     * <code>optional .RogueDialogueEvent event_data = 14;</code>
+     * @param value the eventData to set
+     * @return this
+     */
+    public SelectRogueDialogueEventScRsp setEventData(
+        final RogueDialogueEventOuterClass.RogueDialogueEvent value) {
+      bitField0_ |= 0x00000004;
+      eventData.copyFrom(value);
+      return this;
+    }
+
+    /**
+     * <code>repeated .DialogueResult dialogue_result = 6;</code>
+     * @return whether the dialogueResult field is set
+     */
+    public boolean hasDialogueResult() {
+      return (bitField0_ & 0x00000008) != 0;
+    }
+
+    /**
+     * <code>repeated .DialogueResult dialogue_result = 6;</code>
+     * @return this
+     */
+    public SelectRogueDialogueEventScRsp clearDialogueResult() {
+      bitField0_ &= ~0x00000008;
+      dialogueResult.clear();
+      return this;
+    }
+
+    /**
+     * <code>repeated .DialogueResult dialogue_result = 6;</code>
+     *
+     * This method returns the internal storage object without modifying any has state.
+     * The returned object should not be modified and be treated as read-only.
+     *
+     * Use {@link #getMutableDialogueResult()} if you want to modify it.
+     *
+     * @return internal storage object for reading
+     */
+    public RepeatedMessage<DialogueResultOuterClass.DialogueResult> getDialogueResult() {
+      return dialogueResult;
+    }
+
+    /**
+     * <code>repeated .DialogueResult dialogue_result = 6;</code>
+     *
+     * This method returns the internal storage object and sets the corresponding
+     * has state. The returned object will become part of this message and its
+     * contents may be modified as long as the has state is not cleared.
+     *
+     * @return internal storage object for modifications
+     */
+    public RepeatedMessage<DialogueResultOuterClass.DialogueResult> getMutableDialogueResult() {
+      bitField0_ |= 0x00000008;
+      return dialogueResult;
+    }
+
+    /**
+     * <code>repeated .DialogueResult dialogue_result = 6;</code>
+     * @param value the dialogueResult to add
+     * @return this
+     */
+    public SelectRogueDialogueEventScRsp addDialogueResult(
+        final DialogueResultOuterClass.DialogueResult value) {
+      bitField0_ |= 0x00000008;
+      dialogueResult.add(value);
+      return this;
+    }
+
+    /**
+     * <code>repeated .DialogueResult dialogue_result = 6;</code>
+     * @param values the dialogueResult to add
+     * @return this
+     */
+    public SelectRogueDialogueEventScRsp addAllDialogueResult(
+        final DialogueResultOuterClass.DialogueResult... values) {
+      bitField0_ |= 0x00000008;
+      dialogueResult.addAll(values);
       return this;
     }
 
@@ -117,8 +256,10 @@ public final class SelectRogueDialogueEventScRspOuterClass {
       cachedSize = other.cachedSize;
       if ((bitField0_ | other.bitField0_) != 0) {
         bitField0_ = other.bitField0_;
-        retcode = other.retcode;
         dialogueEventId = other.dialogueEventId;
+        retcode = other.retcode;
+        eventData.copyFrom(other.eventData);
+        dialogueResult.copyFrom(other.dialogueResult);
       }
       return this;
     }
@@ -129,11 +270,17 @@ public final class SelectRogueDialogueEventScRspOuterClass {
         return this;
       }
       cachedSize = -1;
+      if (other.hasDialogueEventId()) {
+        setDialogueEventId(other.dialogueEventId);
+      }
       if (other.hasRetcode()) {
         setRetcode(other.retcode);
       }
-      if (other.hasDialogueEventId()) {
-        setDialogueEventId(other.dialogueEventId);
+      if (other.hasEventData()) {
+        getMutableEventData().mergeFrom(other.eventData);
+      }
+      if (other.hasDialogueResult()) {
+        getMutableDialogueResult().addAll(other.dialogueResult);
       }
       return this;
     }
@@ -145,8 +292,10 @@ public final class SelectRogueDialogueEventScRspOuterClass {
       }
       cachedSize = -1;
       bitField0_ = 0;
-      retcode = 0;
       dialogueEventId = 0;
+      retcode = 0;
+      eventData.clear();
+      dialogueResult.clear();
       return this;
     }
 
@@ -157,6 +306,8 @@ public final class SelectRogueDialogueEventScRspOuterClass {
       }
       cachedSize = -1;
       bitField0_ = 0;
+      eventData.clearQuick();
+      dialogueResult.clearQuick();
       return this;
     }
 
@@ -170,19 +321,31 @@ public final class SelectRogueDialogueEventScRspOuterClass {
       }
       SelectRogueDialogueEventScRsp other = (SelectRogueDialogueEventScRsp) o;
       return bitField0_ == other.bitField0_
+        && (!hasDialogueEventId() || dialogueEventId == other.dialogueEventId)
         && (!hasRetcode() || retcode == other.retcode)
-        && (!hasDialogueEventId() || dialogueEventId == other.dialogueEventId);
+        && (!hasEventData() || eventData.equals(other.eventData))
+        && (!hasDialogueResult() || dialogueResult.equals(other.dialogueResult));
     }
 
     @Override
     public void writeTo(final ProtoSink output) throws IOException {
       if ((bitField0_ & 0x00000001) != 0) {
-        output.writeRawByte((byte) 8);
-        output.writeUInt32NoTag(retcode);
+        output.writeRawByte((byte) 72);
+        output.writeUInt32NoTag(dialogueEventId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        output.writeRawByte((byte) 96);
-        output.writeUInt32NoTag(dialogueEventId);
+        output.writeRawByte((byte) 120);
+        output.writeUInt32NoTag(retcode);
+      }
+      if ((bitField0_ & 0x00000004) != 0) {
+        output.writeRawByte((byte) 114);
+        output.writeMessageNoTag(eventData);
+      }
+      if ((bitField0_ & 0x00000008) != 0) {
+        for (int i = 0; i < dialogueResult.length(); i++) {
+          output.writeRawByte((byte) 50);
+          output.writeMessageNoTag(dialogueResult.get(i));
+        }
       }
     }
 
@@ -190,10 +353,16 @@ public final class SelectRogueDialogueEventScRspOuterClass {
     protected int computeSerializedSize() {
       int size = 0;
       if ((bitField0_ & 0x00000001) != 0) {
-        size += 1 + ProtoSink.computeUInt32SizeNoTag(retcode);
+        size += 1 + ProtoSink.computeUInt32SizeNoTag(dialogueEventId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        size += 1 + ProtoSink.computeUInt32SizeNoTag(dialogueEventId);
+        size += 1 + ProtoSink.computeUInt32SizeNoTag(retcode);
+      }
+      if ((bitField0_ & 0x00000004) != 0) {
+        size += 1 + ProtoSink.computeMessageSizeNoTag(eventData);
+      }
+      if ((bitField0_ & 0x00000008) != 0) {
+        size += (1 * dialogueResult.length()) + ProtoSink.computeRepeatedMessageSizeNoTag(dialogueResult);
       }
       return size;
     }
@@ -205,20 +374,37 @@ public final class SelectRogueDialogueEventScRspOuterClass {
       int tag = input.readTag();
       while (true) {
         switch (tag) {
-          case 8: {
-            // retcode
-            retcode = input.readUInt32();
+          case 72: {
+            // dialogueEventId
+            dialogueEventId = input.readUInt32();
             bitField0_ |= 0x00000001;
             tag = input.readTag();
-            if (tag != 96) {
+            if (tag != 120) {
               break;
             }
           }
-          case 96: {
-            // dialogueEventId
-            dialogueEventId = input.readUInt32();
+          case 120: {
+            // retcode
+            retcode = input.readUInt32();
             bitField0_ |= 0x00000002;
             tag = input.readTag();
+            if (tag != 114) {
+              break;
+            }
+          }
+          case 114: {
+            // eventData
+            input.readMessage(eventData);
+            bitField0_ |= 0x00000004;
+            tag = input.readTag();
+            if (tag != 50) {
+              break;
+            }
+          }
+          case 50: {
+            // dialogueResult
+            tag = input.readRepeatedMessage(dialogueResult, tag);
+            bitField0_ |= 0x00000008;
             if (tag != 0) {
               break;
             }
@@ -241,10 +427,16 @@ public final class SelectRogueDialogueEventScRspOuterClass {
     public void writeTo(final JsonSink output) throws IOException {
       output.beginObject();
       if ((bitField0_ & 0x00000001) != 0) {
-        output.writeUInt32(FieldNames.retcode, retcode);
+        output.writeUInt32(FieldNames.dialogueEventId, dialogueEventId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        output.writeUInt32(FieldNames.dialogueEventId, dialogueEventId);
+        output.writeUInt32(FieldNames.retcode, retcode);
+      }
+      if ((bitField0_ & 0x00000004) != 0) {
+        output.writeMessage(FieldNames.eventData, eventData);
+      }
+      if ((bitField0_ & 0x00000008) != 0) {
+        output.writeRepeatedMessage(FieldNames.dialogueResult, dialogueResult);
       }
       output.endObject();
     }
@@ -256,10 +448,11 @@ public final class SelectRogueDialogueEventScRspOuterClass {
       }
       while (!input.isAtEnd()) {
         switch (input.readFieldHash()) {
-          case 1097936398: {
-            if (input.isAtField(FieldNames.retcode)) {
+          case 88389725:
+          case 1671736167: {
+            if (input.isAtField(FieldNames.dialogueEventId)) {
               if (!input.trySkipNullValue()) {
-                retcode = input.readUInt32();
+                dialogueEventId = input.readUInt32();
                 bitField0_ |= 0x00000001;
               }
             } else {
@@ -267,12 +460,35 @@ public final class SelectRogueDialogueEventScRspOuterClass {
             }
             break;
           }
-          case 88389725:
-          case 1671736167: {
-            if (input.isAtField(FieldNames.dialogueEventId)) {
+          case 1097936398: {
+            if (input.isAtField(FieldNames.retcode)) {
               if (!input.trySkipNullValue()) {
-                dialogueEventId = input.readUInt32();
+                retcode = input.readUInt32();
                 bitField0_ |= 0x00000002;
+              }
+            } else {
+              input.skipUnknownField();
+            }
+            break;
+          }
+          case 30931300:
+          case 983877167: {
+            if (input.isAtField(FieldNames.eventData)) {
+              if (!input.trySkipNullValue()) {
+                input.readMessage(eventData);
+                bitField0_ |= 0x00000004;
+              }
+            } else {
+              input.skipUnknownField();
+            }
+            break;
+          }
+          case 1191037973:
+          case 1574283364: {
+            if (input.isAtField(FieldNames.dialogueResult)) {
+              if (!input.trySkipNullValue()) {
+                input.readRepeatedMessage(dialogueResult);
+                bitField0_ |= 0x00000008;
               }
             } else {
               input.skipUnknownField();
@@ -334,9 +550,13 @@ public final class SelectRogueDialogueEventScRspOuterClass {
      * Contains name constants used for serializing JSON
      */
     static class FieldNames {
+      static final FieldName dialogueEventId = FieldName.forField("dialogueEventId", "dialogue_event_id");
+
       static final FieldName retcode = FieldName.forField("retcode");
 
-      static final FieldName dialogueEventId = FieldName.forField("dialogueEventId", "dialogue_event_id");
+      static final FieldName eventData = FieldName.forField("eventData", "event_data");
+
+      static final FieldName dialogueResult = FieldName.forField("dialogueResult", "dialogue_result");
     }
   }
 }

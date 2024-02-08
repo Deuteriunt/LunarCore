@@ -11,7 +11,6 @@ import lombok.Getter;
 
 @Getter
 public class Config {
-
     public DatabaseInfo accountDatabase = new DatabaseInfo();
     public DatabaseInfo gameDatabase = new DatabaseInfo();
     public InternalMongoInfo internalMongoServer = new InternalMongoInfo();
@@ -42,7 +41,7 @@ public class Config {
     public static class InternalMongoInfo {
         public String address = "localhost";
         public int port = 27017;
-        public String filePath = "Amireux.mv";
+        public String filePath = "database.mv";
     }
 
     @Getter
@@ -100,7 +99,7 @@ public class Config {
     @Getter
     public static class GameServerConfig extends ServerConfig {
         public String id = "lunar_rail_test";
-        public String name = "Amireux";
+        public String name = "AmireuxLunar Core";
         public String description = "Amireux LunarCore server";
         public int kcpInterval = 40;
 
@@ -153,11 +152,11 @@ public class Config {
     @Getter
     public static class ServerProfile {
         public String name = "Amireux";
-        public String signature = "输入 /help 以获取命令列表\n欢迎来到Amireux 星穹铁道1.6服务端，如果你是买来的你被骗了，请举报+退款，本服务端免费，倒卖者死全家.\n祝您游戏愉快";
+        public String signature = "输入 /help 以获取命令列表\n欢迎来到Amireux 星穹铁道2.0.0服务端，如果你是买来的你被骗了，请举报+退款，本服务端免费，倒卖者死全家.\n祝您游戏愉快";
         public int level = 114514;
-        public int headIcon = 201303;
+        public int headIcon = 201307;
         public int chatBubbleId = 0;
-        public int displayAvatarId = 1303;
+        public int displayAvatarId = 1307;
         public int displayAvatarLevel = 114514;
     }
     
@@ -169,9 +168,9 @@ public class Config {
         public List<ItemParam> attachments;
         
         public WelcomeMail() {
-            this.title = "欢迎来到Amireux 星穹铁道1.6服务端";
+            this.title = "欢迎来到Amireux 星穹铁道2.0.0服务端";
             this.sender = "Amireux";
-            this.content = "欢迎来到Amireux 星穹铁道1.6服务端，如果你是买来的你被骗了，请举报+退款，本服务端免费，倒卖者死全家.\n祝您游戏愉快";
+            this.content = "欢迎来到Amireux 星穹铁道2.0.0服务端，如果你是买来的你被骗了，请举报+退款，本服务端免费，倒卖者死全家.\n祝您游戏愉快";
             this.attachments = List.of(
                 new ItemParam(2, 1000000),
                 new ItemParam(101, 100),

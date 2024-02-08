@@ -19,14 +19,14 @@ public final class ClientMailAttachmentItemOuterClass {
     private static final long serialVersionUID = 0L;
 
     /**
-     * <code>optional uint32 FKIPJPLMBFI = 2;</code>
+     * <code>optional uint32 mail_id = 1;</code>
      */
-    private int fKIPJPLMBFI;
+    private int mailId;
 
     /**
-     * <code>optional uint32 ANAFKBMJOBJ = 12;</code>
+     * <code>optional uint32 item_id = 8;</code>
      */
-    private int aNAFKBMJOBJ;
+    private int itemId;
 
     private ClientMailAttachmentItem() {
     }
@@ -39,76 +39,76 @@ public final class ClientMailAttachmentItemOuterClass {
     }
 
     /**
-     * <code>optional uint32 FKIPJPLMBFI = 2;</code>
-     * @return whether the fKIPJPLMBFI field is set
+     * <code>optional uint32 mail_id = 1;</code>
+     * @return whether the mailId field is set
      */
-    public boolean hasFKIPJPLMBFI() {
+    public boolean hasMailId() {
       return (bitField0_ & 0x00000001) != 0;
     }
 
     /**
-     * <code>optional uint32 FKIPJPLMBFI = 2;</code>
+     * <code>optional uint32 mail_id = 1;</code>
      * @return this
      */
-    public ClientMailAttachmentItem clearFKIPJPLMBFI() {
+    public ClientMailAttachmentItem clearMailId() {
       bitField0_ &= ~0x00000001;
-      fKIPJPLMBFI = 0;
+      mailId = 0;
       return this;
     }
 
     /**
-     * <code>optional uint32 FKIPJPLMBFI = 2;</code>
-     * @return the fKIPJPLMBFI
+     * <code>optional uint32 mail_id = 1;</code>
+     * @return the mailId
      */
-    public int getFKIPJPLMBFI() {
-      return fKIPJPLMBFI;
+    public int getMailId() {
+      return mailId;
     }
 
     /**
-     * <code>optional uint32 FKIPJPLMBFI = 2;</code>
-     * @param value the fKIPJPLMBFI to set
+     * <code>optional uint32 mail_id = 1;</code>
+     * @param value the mailId to set
      * @return this
      */
-    public ClientMailAttachmentItem setFKIPJPLMBFI(final int value) {
+    public ClientMailAttachmentItem setMailId(final int value) {
       bitField0_ |= 0x00000001;
-      fKIPJPLMBFI = value;
+      mailId = value;
       return this;
     }
 
     /**
-     * <code>optional uint32 ANAFKBMJOBJ = 12;</code>
-     * @return whether the aNAFKBMJOBJ field is set
+     * <code>optional uint32 item_id = 8;</code>
+     * @return whether the itemId field is set
      */
-    public boolean hasANAFKBMJOBJ() {
+    public boolean hasItemId() {
       return (bitField0_ & 0x00000002) != 0;
     }
 
     /**
-     * <code>optional uint32 ANAFKBMJOBJ = 12;</code>
+     * <code>optional uint32 item_id = 8;</code>
      * @return this
      */
-    public ClientMailAttachmentItem clearANAFKBMJOBJ() {
+    public ClientMailAttachmentItem clearItemId() {
       bitField0_ &= ~0x00000002;
-      aNAFKBMJOBJ = 0;
+      itemId = 0;
       return this;
     }
 
     /**
-     * <code>optional uint32 ANAFKBMJOBJ = 12;</code>
-     * @return the aNAFKBMJOBJ
+     * <code>optional uint32 item_id = 8;</code>
+     * @return the itemId
      */
-    public int getANAFKBMJOBJ() {
-      return aNAFKBMJOBJ;
+    public int getItemId() {
+      return itemId;
     }
 
     /**
-     * <code>optional uint32 ANAFKBMJOBJ = 12;</code>
-     * @param value the aNAFKBMJOBJ to set
+     * <code>optional uint32 item_id = 8;</code>
+     * @param value the itemId to set
      * @return this
      */
-    public ClientMailAttachmentItem setANAFKBMJOBJ(final int value) {
+    public ClientMailAttachmentItem setItemId(final int value) {
       bitField0_ |= 0x00000002;
-      aNAFKBMJOBJ = value;
+      itemId = value;
       return this;
     }
 
@@ -117,8 +117,8 @@ public final class ClientMailAttachmentItemOuterClass {
       cachedSize = other.cachedSize;
       if ((bitField0_ | other.bitField0_) != 0) {
         bitField0_ = other.bitField0_;
-        fKIPJPLMBFI = other.fKIPJPLMBFI;
-        aNAFKBMJOBJ = other.aNAFKBMJOBJ;
+        mailId = other.mailId;
+        itemId = other.itemId;
       }
       return this;
     }
@@ -129,11 +129,11 @@ public final class ClientMailAttachmentItemOuterClass {
         return this;
       }
       cachedSize = -1;
-      if (other.hasFKIPJPLMBFI()) {
-        setFKIPJPLMBFI(other.fKIPJPLMBFI);
+      if (other.hasMailId()) {
+        setMailId(other.mailId);
       }
-      if (other.hasANAFKBMJOBJ()) {
-        setANAFKBMJOBJ(other.aNAFKBMJOBJ);
+      if (other.hasItemId()) {
+        setItemId(other.itemId);
       }
       return this;
     }
@@ -145,8 +145,8 @@ public final class ClientMailAttachmentItemOuterClass {
       }
       cachedSize = -1;
       bitField0_ = 0;
-      fKIPJPLMBFI = 0;
-      aNAFKBMJOBJ = 0;
+      mailId = 0;
+      itemId = 0;
       return this;
     }
 
@@ -170,19 +170,19 @@ public final class ClientMailAttachmentItemOuterClass {
       }
       ClientMailAttachmentItem other = (ClientMailAttachmentItem) o;
       return bitField0_ == other.bitField0_
-        && (!hasFKIPJPLMBFI() || fKIPJPLMBFI == other.fKIPJPLMBFI)
-        && (!hasANAFKBMJOBJ() || aNAFKBMJOBJ == other.aNAFKBMJOBJ);
+        && (!hasMailId() || mailId == other.mailId)
+        && (!hasItemId() || itemId == other.itemId);
     }
 
     @Override
     public void writeTo(final ProtoSink output) throws IOException {
       if ((bitField0_ & 0x00000001) != 0) {
-        output.writeRawByte((byte) 16);
-        output.writeUInt32NoTag(fKIPJPLMBFI);
+        output.writeRawByte((byte) 8);
+        output.writeUInt32NoTag(mailId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        output.writeRawByte((byte) 96);
-        output.writeUInt32NoTag(aNAFKBMJOBJ);
+        output.writeRawByte((byte) 64);
+        output.writeUInt32NoTag(itemId);
       }
     }
 
@@ -190,10 +190,10 @@ public final class ClientMailAttachmentItemOuterClass {
     protected int computeSerializedSize() {
       int size = 0;
       if ((bitField0_ & 0x00000001) != 0) {
-        size += 1 + ProtoSink.computeUInt32SizeNoTag(fKIPJPLMBFI);
+        size += 1 + ProtoSink.computeUInt32SizeNoTag(mailId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        size += 1 + ProtoSink.computeUInt32SizeNoTag(aNAFKBMJOBJ);
+        size += 1 + ProtoSink.computeUInt32SizeNoTag(itemId);
       }
       return size;
     }
@@ -205,18 +205,18 @@ public final class ClientMailAttachmentItemOuterClass {
       int tag = input.readTag();
       while (true) {
         switch (tag) {
-          case 16: {
-            // fKIPJPLMBFI
-            fKIPJPLMBFI = input.readUInt32();
+          case 8: {
+            // mailId
+            mailId = input.readUInt32();
             bitField0_ |= 0x00000001;
             tag = input.readTag();
-            if (tag != 96) {
+            if (tag != 64) {
               break;
             }
           }
-          case 96: {
-            // aNAFKBMJOBJ
-            aNAFKBMJOBJ = input.readUInt32();
+          case 64: {
+            // itemId
+            itemId = input.readUInt32();
             bitField0_ |= 0x00000002;
             tag = input.readTag();
             if (tag != 0) {
@@ -241,10 +241,10 @@ public final class ClientMailAttachmentItemOuterClass {
     public void writeTo(final JsonSink output) throws IOException {
       output.beginObject();
       if ((bitField0_ & 0x00000001) != 0) {
-        output.writeUInt32(FieldNames.fKIPJPLMBFI, fKIPJPLMBFI);
+        output.writeUInt32(FieldNames.mailId, mailId);
       }
       if ((bitField0_ & 0x00000002) != 0) {
-        output.writeUInt32(FieldNames.aNAFKBMJOBJ, aNAFKBMJOBJ);
+        output.writeUInt32(FieldNames.itemId, itemId);
       }
       output.endObject();
     }
@@ -256,10 +256,11 @@ public final class ClientMailAttachmentItemOuterClass {
       }
       while (!input.isAtEnd()) {
         switch (input.readFieldHash()) {
-          case -581795918: {
-            if (input.isAtField(FieldNames.fKIPJPLMBFI)) {
+          case -1081574094:
+          case 830962851: {
+            if (input.isAtField(FieldNames.mailId)) {
               if (!input.trySkipNullValue()) {
-                fKIPJPLMBFI = input.readUInt32();
+                mailId = input.readUInt32();
                 bitField0_ |= 0x00000001;
               }
             } else {
@@ -267,10 +268,11 @@ public final class ClientMailAttachmentItemOuterClass {
             }
             break;
           }
-          case 1037527505: {
-            if (input.isAtField(FieldNames.aNAFKBMJOBJ)) {
+          case -1178662002:
+          case 2116204999: {
+            if (input.isAtField(FieldNames.itemId)) {
               if (!input.trySkipNullValue()) {
-                aNAFKBMJOBJ = input.readUInt32();
+                itemId = input.readUInt32();
                 bitField0_ |= 0x00000002;
               }
             } else {
@@ -331,9 +333,9 @@ public final class ClientMailAttachmentItemOuterClass {
      * Contains name constants used for serializing JSON
      */
     static class FieldNames {
-      static final FieldName fKIPJPLMBFI = FieldName.forField("FKIPJPLMBFI");
+      static final FieldName mailId = FieldName.forField("mailId", "mail_id");
 
-      static final FieldName aNAFKBMJOBJ = FieldName.forField("ANAFKBMJOBJ");
+      static final FieldName itemId = FieldName.forField("itemId", "item_id");
     }
   }
 }
